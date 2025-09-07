@@ -1,0 +1,70 @@
+@if (form) {
+  <form [formGroup]="form" class="flex flex-wrap gap-2">
+    @for (item of items(); track item.key) {
+      <div [class]="item.styleClass || 'w-3xs'">
+        @if (item.withWrapper) {
+          <lib-controller-wrapper
+            [label]="item.label || ''"
+            [iconPosition]="item.iconPosition || 'center left'"
+            [icon]="item.icon"
+            [iconSet]="item.iconSet || ''"
+          >
+            <ng-container
+              *ngTemplateOutlet="
+                fieldFactory;
+                context: {
+                  $implicit: item,
+                  isCustom: item.type === DYNAMIC_TYPE.CUSTOM,
+                  _control: form.get(item.key),
+                }
+              "
+            ></ng-container>
+          </lib-controller-wrapper>
+        } @else {
+          <ng-container
+            *ngTemplateOutlet="
+              fieldFactory;
+              context: {
+                $implicit: item,
+                isCustom: item.type === DYNAMIC_TYPE.CUSTOM,
+                _control: form.get(item.key),
+              }
+            "
+          ></ng-container>
+        }
+      </div>
+    }
+
+    <ng-container
+      *ngTemplateOutlet="actionTemplate() || defaultAction"
+    ></ng-container>
+  </form>
+}
+
+<ng-template
+  #fieldFactory
+  let-isCustom="isCustom"
+  let-control="_control"
+  let-item
+>
+  @if (isCustom) {
+    <ng-template
+      *ngTemplateOutlet="item.templateRef; context: { $implicit: control }"
+    ></ng-template>
+  } @else if (item.componentData) {
+    <ng-template
+      *ngComponentOutlet="
+        item.componentData.component | async;
+        inputs: item.componentData.inputs | mergeObjects: item.inputs || {};
+        injector: control | dynamicControl
+      "
+    ></ng-template>
+  }
+</ng-template>
+
+<ng-template #defaultAction>
+  <div class="ms-auto mt-auto flex gap-2 h-full items-center">
+    <button type="submit">Filter</button>
+    <button type="reset">Clear</button>
+  </div>
+</ng-template>

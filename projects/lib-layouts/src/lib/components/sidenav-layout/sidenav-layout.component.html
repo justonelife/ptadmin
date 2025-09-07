@@ -1,0 +1,90 @@
+@if (isHandset$ | async) {
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="over">
+      <ng-container *ngTemplateOutlet="sidebar"></ng-container>
+    </mat-sidenav>
+    <div class="h-screen w-screen">
+      <header
+        class="flex justify-between items-center p-2 border-b border-stone-300 dark:border-stone-800 sticky w-full top-0 z-999 bg-primary"
+      >
+        <button lib-button variant="icon" icon="sort" (click)="open()"></button>
+      </header>
+      <ng-container *ngTemplateOutlet="_main"></ng-container>
+    </div>
+  </mat-sidenav-container>
+} @else {
+  @let _sidebarCollapsed = sidebarCollapsed();
+  <div class="h-svh bg-gray-50 dark:bg-slate-950">
+    <div
+      class="sidebar fixed h-svh border-r border-stone-300 dark:border-stone-800 bg-primary flex flex-col justify-between"
+      [ngClass]="'sidebar--' + (_sidebarCollapsed ? 'collapse' : 'expand')"
+    >
+      <ng-container *ngTemplateOutlet="sidebar"></ng-container>
+      @if (extraTemplate(); as _extraTemplate) {
+        <ng-container *ngTemplateOutlet="_extraTemplate"></ng-container>
+      }
+    </div>
+    <div
+      class="main flex flex-col h-full"
+      [ngClass]="'main--side-' + (_sidebarCollapsed ? 'collapse' : 'expand')"
+    >
+      <header
+        class="flex justify-between gap-4 items-center p-4 sticky w-full top-0 z-999 bg-transparent"
+      >
+        <button
+          lib-button
+          variant="icon"
+          [icon]="_sidebarCollapsed ? 'menu' : 'menu_open'"
+          (click)="toggleDesktopSidebarState()"
+        ></button>
+        <div class="flex flex-col grow shrink-0">
+          <h1 class="text-2xl font-bold text-gradient">{{ pageTitle() }}</h1>
+          <p class="text-sm text-gray-500 dark:text-slate-400">
+            {{ pageSubTitle() }}
+          </p>
+        </div>
+        <ng-container #globalAction></ng-container>
+      </header>
+      <ng-container *ngTemplateOutlet="_main"></ng-container>
+    </div>
+  </div>
+}
+
+<ng-template #sidebar>
+  <div class="p-6">
+    <ng-container *ngTemplateOutlet="_logo"></ng-container>
+    <menu class="mt-4 flex flex-col gap-2">
+      @for (item of navConfig(); track item.path) {
+        <li
+          [routerLink]="item.path"
+          class="cursor-pointer flex items-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-blue-50 hover:dark:bg-slate-800/50 transition-colors text-primary font-medium dark:text-slate-400 dark:hover:text-white"
+          libIconPosition="center left"
+          [icon]="item.icon || ''"
+          [iconSet]="item.iconSet || ''"
+          routerLinkActive="bg-blue-100 text-blue-700 dark:bg-slate-800/50 dark:text-white"
+        >
+          <a class="overflow-hidden text-ellipsis line-clamp-1">
+            {{ item.title }}
+          </a>
+        </li>
+      } @empty {
+        <ng-content select="sidebar">
+          Please provide item through navConfig or custom through ng-template
+          sidebar
+        </ng-content>
+      }
+    </menu>
+  </div>
+</ng-template>
+
+<ng-template #_main>
+  @if (mainTemplate(); as _mainTemplate) {
+    <ng-container *ngTemplateOutlet="_mainTemplate"></ng-container>
+  }
+</ng-template>
+
+<ng-template #_logo>
+  @if (logoTemplate(); as _lg) {
+    <ng-container *ngTemplateOutlet="_lg"></ng-container>
+  }
+</ng-template>

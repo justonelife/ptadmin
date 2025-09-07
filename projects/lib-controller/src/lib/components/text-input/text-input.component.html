@@ -1,0 +1,25 @@
+@if (label(); as _label) {
+  <span class="text-xs font-semibold fg-primary mb-3 block">
+    {{ _label }}
+  </span>
+}
+
+<mat-form-field subscriptSizing="dynamic">
+  @if (type() === "input") {
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="state"
+      class="w-full h-full focus:outline-none"
+      [placeholder]="placeholder()"
+      (ngModelChange)="onChange(state)"
+    />
+  } @else {
+    <textarea
+      matInput
+      [(ngModel)]="state"
+      [placeholder]="placeholder()"
+      (ngModelChange)="onChange(state)"
+    ></textarea>
+  }
+</mat-form-field>

@@ -1,0 +1,11 @@
+@use "./variables";
+@use "./mixins";
+@use "./tailwindcss/custom";
+@use "./material/custom" as materialCustom;
+
+$export-config: (
+  "radius": variables.$radius,
+  "app-color": variables.$color,
+);
+
+@include mixins.export-root-from-config($export-config);

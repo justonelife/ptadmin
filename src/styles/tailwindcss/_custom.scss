@@ -1,0 +1,47 @@
+@use "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer utility {
+  .bg-primary {
+    background-color: light-dark(
+      var(--app-color-white),
+      var(--app-color-black)
+    );
+  }
+
+  .fg-primary {
+    color: light-dark(black, var(--app-color-white));
+  }
+
+  .bg-secondary {
+    background-color: light-dark(var(--color-gray-100), #020618);
+    //TODO:why class not work
+    // @apply bg-gray-50 dark:bg-neutral-700;
+  }
+
+  .bg-gradient {
+    background: #16a2f9;
+    background: linear-gradient(
+      90deg,
+      rgba(22, 162, 249, 1) 0%,
+      rgba(88, 68, 239, 1) 100%
+    );
+  }
+
+  .text-gradient {
+    color: transparent;
+    background: #16a2f9;
+    background: linear-gradient(
+      90deg,
+      rgba(22, 162, 249, 1) 0%,
+      rgba(88, 68, 239, 1) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+  .lib-bg-transparent {
+    background: transparent !important;
+  }
+}

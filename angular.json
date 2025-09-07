@@ -1,0 +1,290 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "cli": {
+    "schematicCollections": [
+      "angular-eslint"
+    ]
+  },
+  "projects": {
+    "alp-dynamic-form-table": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "flat": true,
+          "skipTests": true,
+          "inlineTemplate": true,
+          "inlineStyle": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "alp-dynamic-form-table:build:production"
+            },
+            "development": {
+              "buildTarget": "alp-dynamic-form-table:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.scss"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ],
+            "eslintConfig": "src/eslint.config.js"
+          }
+        }
+      }
+    },
+    "lib-controller": {
+      "projectType": "library",
+      "root": "projects/lib-controller",
+      "sourceRoot": "projects/lib-controller/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/lib-controller/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/lib-controller/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/lib-controller/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/lib-controller/**/*.ts",
+              "projects/lib-controller/**/*.html"
+            ],
+            "eslintConfig": "projects/lib-controller/eslint.config.js"
+          }
+        }
+      }
+    },
+    "lib-core": {
+      "projectType": "library",
+      "root": "projects/lib-core",
+      "sourceRoot": "projects/lib-core/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/lib-core/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/lib-core/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/lib-core/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/lib-core/**/*.ts",
+              "projects/lib-core/**/*.html"
+            ],
+            "eslintConfig": "projects/lib-core/eslint.config.js"
+          }
+        }
+      }
+    },
+    "lib-button": {
+      "projectType": "library",
+      "root": "projects/lib-button",
+      "sourceRoot": "projects/lib-button/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/lib-button/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/lib-button/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/lib-button/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/lib-button/**/*.ts",
+              "projects/lib-button/**/*.html"
+            ],
+            "eslintConfig": "projects/lib-button/eslint.config.js"
+          }
+        }
+      }
+    },
+    "lib-layouts": {
+      "projectType": "library",
+      "root": "projects/lib-layouts",
+      "sourceRoot": "projects/lib-layouts/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/lib-layouts/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/lib-layouts/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/lib-layouts/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/lib-layouts/**/*.ts",
+              "projects/lib-layouts/**/*.html"
+            ],
+            "eslintConfig": "projects/lib-layouts/eslint.config.js"
+          }
+        }
+      }
+    },
+    "lib-tabs": {
+      "projectType": "library",
+      "root": "projects/lib-tabs",
+      "sourceRoot": "projects/lib-tabs/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/lib-tabs/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/lib-tabs/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/lib-tabs/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/lib-tabs/**/*.ts",
+              "projects/lib-tabs/**/*.html"
+            ],
+            "eslintConfig": "projects/lib-tabs/eslint.config.js"
+          }
+        }
+      }
+    }
+  }
+}

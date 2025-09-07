@@ -1,0 +1,12 @@
+<form [formGroup]="form">
+  <lib-dynamic-form [fields]="formFields()"></lib-dynamic-form>
+</form>
+
+<div class="border p-4 rounded-md">
+  <!-- <pre>{{ fields() | json }}</pre> -->
+  <h1 class="font-bold">form value</h1>
+  <pre>{{ form.value | json }}</pre>
+
+  <h1 class="font-bold">valid</h1>
+  <span>{{ form.valid }}</span>
+</div>

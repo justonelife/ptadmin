@@ -1,0 +1,28 @@
+@if (label(); as _label) {
+  <span class="text-xs font-semibold text-gray-800 mb-3 block">
+    {{ _label }}
+  </span>
+}
+
+<mat-form-field class="h-auto!">
+  <mat-chip-grid #chipGrid [(ngModel)]="state">
+    @for (item of state; track item) {
+      <mat-chip-row>
+        {{ item }}
+        <button matChipRemove>
+          <mat-icon
+            fontSet="outlined"
+            class="text-orange-700! dark:text-white!"
+          >
+            cancel
+          </mat-icon>
+        </button>
+      </mat-chip-row>
+    }
+    <input
+      [placeholder]="placeholder()"
+      [matChipInputFor]="chipGrid"
+      (matChipInputTokenEnd)="addItem($event)"
+    />
+  </mat-chip-grid>
+</mat-form-field>

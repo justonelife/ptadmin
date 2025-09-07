@@ -1,0 +1,26 @@
+:host ::ng-deep {
+  .lib-controller {
+    display: unset;
+    border: 0;
+    height: unset;
+    padding: unset;
+    width: 100%;
+
+    label {
+      display: none;
+    }
+
+    & > mat-form-field {
+      display: unset;
+      border: 0;
+    }
+
+    & > mat-form-field .mat-mdc-text-field-wrapper {
+      padding: unset;
+    }
+
+    & > mat-form-field .mat-mdc-form-field-infix {
+      width: 0; //FIXME:why?
+    }
+  }
+}

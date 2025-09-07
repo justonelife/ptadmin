@@ -1,0 +1,26 @@
+$expandWidth: 255px;
+$collapseWidth: 82px;
+
+.sidebar {
+  transition: width 300ms ease;
+
+  &--expand {
+    width: $expandWidth;
+  }
+
+  &--collapse {
+    width: $collapseWidth;
+  }
+}
+
+.main {
+  transition: margin-left 300ms ease;
+
+  &--side-expand {
+    margin-left: $expandWidth;
+  }
+
+  &--side-collapse {
+    margin-left: $collapseWidth;
+  }
+}

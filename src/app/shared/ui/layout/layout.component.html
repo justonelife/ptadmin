@@ -1,0 +1,29 @@
+<lib-sidenav-layout
+  [navConfig]="MENU || []"
+  [isSidebarCollapsed]="isSidebarCollapsed()"
+  (sidebarCollapsedChange)="appStore.setSidebarCollapsed($event)"
+>
+  <ng-template #logo>
+    <a routerLink="/">
+      <app-logo></app-logo>
+    </a>
+  </ng-template>
+  <ng-template #main>
+    <main class="px-4 py-6 h-full overflow-y-scroll">
+      <router-outlet />
+    </main>
+  </ng-template>
+
+  <!-- <ng-template #extra> -->
+  <!--   <div -->
+  <!--     class="flex flex-wrap items-center justify-center p-2 px-6 border-t border-stone-300 dark:border-stone-800" -->
+  <!--   > -->
+  <!--     <button -->
+  <!--       lib-button -->
+  <!--       variant="outlined" -->
+  <!--       [icon]="(theme() | isLightTheme) ? 'light_mode' : 'dark_mode'" -->
+  <!--       (click)="toggleTheme()" -->
+  <!--     ></button> -->
+  <!--   </div> -->
+  <!-- </ng-template> -->
+</lib-sidenav-layout>

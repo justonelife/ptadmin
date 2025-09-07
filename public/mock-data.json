@@ -1,0 +1,352 @@
+[
+  {
+    "firstName": "Misty",
+    "lastName": "Welch",
+    "gender": "female",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Crystal",
+    "lastName": "Vaughn",
+    "gender": "other",
+    "newsletter": true,
+    "language": "vi"
+  },
+  {
+    "firstName": "Lisa",
+    "lastName": "Davis",
+    "gender": "other",
+    "newsletter": true,
+    "language": "jp"
+  },
+  {
+    "firstName": "Sabrina",
+    "lastName": "Gonzalez",
+    "gender": "male",
+    "newsletter": false,
+    "language": "jp"
+  },
+  {
+    "firstName": "Amanda",
+    "lastName": "Wilson",
+    "gender": "other",
+    "newsletter": true,
+    "language": "vi"
+  },
+  {
+    "firstName": "Kenneth",
+    "lastName": "Wright",
+    "gender": "other",
+    "newsletter": false,
+    "language": "vi"
+  },
+  {
+    "firstName": "Julia",
+    "lastName": "Miller",
+    "gender": "female",
+    "newsletter": true,
+    "language": "vi"
+  },
+  {
+    "firstName": "Tyler",
+    "lastName": "Kline",
+    "gender": "male",
+    "newsletter": false,
+    "language": "en"
+  },
+  {
+    "firstName": "Calvin",
+    "lastName": "Powers",
+    "gender": "other",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "George",
+    "lastName": "Brown",
+    "gender": "male",
+    "newsletter": true,
+    "language": "jp"
+  },
+  {
+    "firstName": "Lisa",
+    "lastName": "Kim",
+    "gender": "other",
+    "newsletter": true,
+    "language": "jp"
+  },
+  {
+    "firstName": "Timothy",
+    "lastName": "Thomas",
+    "gender": "male",
+    "newsletter": false,
+    "language": "vi"
+  },
+  {
+    "firstName": "Teresa",
+    "lastName": "Huynh",
+    "gender": "other",
+    "newsletter": true,
+    "language": "jp"
+  },
+  {
+    "firstName": "Valerie",
+    "lastName": "Smith",
+    "gender": "female",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Doris",
+    "lastName": "Jones",
+    "gender": "other",
+    "newsletter": false,
+    "language": "vi"
+  },
+  {
+    "firstName": "Tiffany",
+    "lastName": "Molina",
+    "gender": "female",
+    "newsletter": true,
+    "language": "jp"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Erickson",
+    "gender": "other",
+    "newsletter": false,
+    "language": "en"
+  },
+  {
+    "firstName": "Keith",
+    "lastName": "Gomez",
+    "gender": "female",
+    "newsletter": true,
+    "language": "jp"
+  },
+  {
+    "firstName": "Ryan",
+    "lastName": "Torres",
+    "gender": "male",
+    "newsletter": true,
+    "language": "vi"
+  },
+  {
+    "firstName": "Alicia",
+    "lastName": "Andrade",
+    "gender": "other",
+    "newsletter": false,
+    "language": "en"
+  },
+  {
+    "firstName": "Taylor",
+    "lastName": "Scott",
+    "gender": "female",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Katherine",
+    "lastName": "Bryant",
+    "gender": "female",
+    "newsletter": true,
+    "language": "jp"
+  },
+  {
+    "firstName": "Nicholas",
+    "lastName": "Boyer",
+    "gender": "male",
+    "newsletter": true,
+    "language": "jp"
+  },
+  {
+    "firstName": "Steven",
+    "lastName": "Cameron",
+    "gender": "other",
+    "newsletter": true,
+    "language": "vi"
+  },
+  {
+    "firstName": "Matthew",
+    "lastName": "Stewart",
+    "gender": "female",
+    "newsletter": true,
+    "language": "vi"
+  },
+  {
+    "firstName": "Joseph",
+    "lastName": "Preston",
+    "gender": "male",
+    "newsletter": false,
+    "language": "en"
+  },
+  {
+    "firstName": "Aimee",
+    "lastName": "Mullins",
+    "gender": "male",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Stephanie",
+    "lastName": "Stevens",
+    "gender": "male",
+    "newsletter": false,
+    "language": "vi"
+  },
+  {
+    "firstName": "Terri",
+    "lastName": "Henderson",
+    "gender": "male",
+    "newsletter": false,
+    "language": "en"
+  },
+  {
+    "firstName": "Michelle",
+    "lastName": "Garza",
+    "gender": "male",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Kevin",
+    "lastName": "Dunn",
+    "gender": "other",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Powell",
+    "gender": "male",
+    "newsletter": false,
+    "language": "en"
+  },
+  {
+    "firstName": "Kimberly",
+    "lastName": "Rodriguez",
+    "gender": "other",
+    "newsletter": false,
+    "language": "en"
+  },
+  {
+    "firstName": "Pamela",
+    "lastName": "Day",
+    "gender": "other",
+    "newsletter": false,
+    "language": "jp"
+  },
+  {
+    "firstName": "Steven",
+    "lastName": "Osborn",
+    "gender": "female",
+    "newsletter": false,
+    "language": "jp"
+  },
+  {
+    "firstName": "Amy",
+    "lastName": "Harrell",
+    "gender": "male",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Benjamin",
+    "lastName": "Bryant",
+    "gender": "male",
+    "newsletter": true,
+    "language": "vi"
+  },
+  {
+    "firstName": "Margaret",
+    "lastName": "Anderson",
+    "gender": "male",
+    "newsletter": false,
+    "language": "jp"
+  },
+  {
+    "firstName": "Charles",
+    "lastName": "Khan",
+    "gender": "female",
+    "newsletter": true,
+    "language": "vi"
+  },
+  {
+    "firstName": "Gabrielle",
+    "lastName": "Campbell",
+    "gender": "other",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Carol",
+    "lastName": "Potts",
+    "gender": "other",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Michelle",
+    "lastName": "Fuller",
+    "gender": "male",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Melissa",
+    "lastName": "Mason",
+    "gender": "female",
+    "newsletter": false,
+    "language": "vi"
+  },
+  {
+    "firstName": "Brandi",
+    "lastName": "Moore",
+    "gender": "other",
+    "newsletter": true,
+    "language": "jp"
+  },
+  {
+    "firstName": "Shawn",
+    "lastName": "Ford",
+    "gender": "male",
+    "newsletter": false,
+    "language": "en"
+  },
+  {
+    "firstName": "Jo",
+    "lastName": "Hays",
+    "gender": "male",
+    "newsletter": false,
+    "language": "vi"
+  },
+  {
+    "firstName": "Joel",
+    "lastName": "Manning",
+    "gender": "female",
+    "newsletter": true,
+    "language": "vi"
+  },
+  {
+    "firstName": "Austin",
+    "lastName": "Hunter",
+    "gender": "male",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Stephanie",
+    "lastName": "Smith",
+    "gender": "other",
+    "newsletter": true,
+    "language": "en"
+  },
+  {
+    "firstName": "Anthony",
+    "lastName": "Church",
+    "gender": "female",
+    "newsletter": true,
+    "language": "jp"
+  }
+]

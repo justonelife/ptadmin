@@ -1,0 +1,63 @@
+@if (form) {
+  <form [formGroup]="form" class="grid grid-cols-12 gap-4">
+    @for (item of items(); track item.key) {
+      <div [class]="item.styleClass || 'col-span-6'">
+        @if (item.withWrapper) {
+          <lib-controller-wrapper
+            [label]="item.label || ''"
+            [iconPosition]="item.iconPosition || 'center left'"
+            [icon]="item.icon"
+            [iconSet]="item.iconSet || ''"
+          >
+            <ng-container
+              *ngTemplateOutlet="
+                fieldFactory;
+                context: {
+                  $implicit: item,
+                  isCustom: item.type === DYNAMIC_TYPE.CUSTOM,
+                  _control: form.get(item.key),
+                }
+              "
+            ></ng-container>
+          </lib-controller-wrapper>
+          <lib-error-message [control]="form.get(item.key)"></lib-error-message>
+        } @else {
+          <ng-container
+            *ngTemplateOutlet="
+              fieldFactory;
+              context: {
+                $implicit: item,
+                isCustom: item.type === DYNAMIC_TYPE.CUSTOM,
+                _control: form.get(item.key),
+              }
+            "
+          ></ng-container>
+          <lib-error-message
+            [control]="form.controls[item.key]"
+          ></lib-error-message>
+        }
+      </div>
+    }
+  </form>
+}
+
+<ng-template
+  #fieldFactory
+  let-isCustom="isCustom"
+  let-control="_control"
+  let-item
+>
+  @if (isCustom) {
+    <ng-template
+      *ngTemplateOutlet="item.templateRef; context: { $implicit: control }"
+    ></ng-template>
+  } @else if (item.componentData) {
+    <ng-template
+      *ngComponentOutlet="
+        item.componentData.component | async;
+        inputs: item.componentData.inputs | mergeObjects: item.inputs || {};
+        injector: control | dynamicControl
+      "
+    ></ng-template>
+  }
+</ng-template>
