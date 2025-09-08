@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   imports: [],
-  selector: 'app-general-settings',
-  templateUrl: './general-settings.component.html',
+  selector: 'app-api-settings',
+  templateUrl: './api-settings.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GeneralSettingsComponent {
+export class ApiSettingsComponent {
   constructor() {
-    console.log('init');
+    console.log('api init');
   }
 }

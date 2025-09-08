@@ -13,19 +13,5 @@ export const routes: Routes = [
           (c) => c.ActionsViewComponent
         ),
     },
-    children: [
-      {
-        path: '',
-        redirectTo: 'general',
-        pathMatch: 'full',
-      },
-      {
-        path: 'general',
-        loadComponent: () =>
-          import('./features/general-settings/general-settings.component').then(
-            (c) => c.GeneralSettingsComponent
-          ),
-      },
-    ],
   },
 ];

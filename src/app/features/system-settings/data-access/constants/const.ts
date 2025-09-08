@@ -12,8 +12,8 @@ export const TABS: LibTabItem[] = [
     value: 'api',
     label: 'Api',
     component: import(
-      '@features/system-settings/features/general-settings/general-settings.component'
-    ).then((c) => c.GeneralSettingsComponent),
+      '@features/system-settings/features/api-settings/api-settings.component'
+    ).then((c) => c.ApiSettingsComponent),
   },
   { value: 'email', label: 'Email' },
   { value: 'pt-service', label: 'Pt Service' },
