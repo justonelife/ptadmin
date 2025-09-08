@@ -1,20 +1,16 @@
-@let _mapper = templatesMapper();
+@let _mapper = mapper();
 
 <mat-tab-group>
   @for (tab of tabs(); track tab.value) {
-    <mat-tab [label]="tab.label">
-      <ng-template matTabContent>
-        @if (_mapper[tab.value].component) {
-          <ng-container
-            *ngComponentOutlet="_mapper[tab.value].component | async"
-          ></ng-container>
-        } @else {
-          <ng-container
-            *ngTemplateOutlet="_mapper[tab.value].template"
-          ></ng-container>
-        }
-      </ng-template>
-    </mat-tab>
+  <mat-tab [label]="tab.label">
+    <ng-template matTabContent>
+      @if (_mapper[tab.value].component) {
+      <ng-container *ngComponentOutlet="_mapper[tab.value].component | async"></ng-container>
+      } @else {
+      <ng-container *ngTemplateOutlet="_mapper[tab.value].template"></ng-container>
+      }
+    </ng-template>
+  </mat-tab>
   }
 </mat-tab-group>
 <ng-content></ng-content>
