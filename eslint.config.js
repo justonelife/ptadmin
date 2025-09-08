@@ -24,7 +24,14 @@ module.exports = tseslint.config(
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility,
     ],
-    rules: {},
+    rules: {
+      "@angular-eslint/template/elements-content": [
+        "error",
+        {
+          allowList: ["lib-button"],
+        },
+      ],
+    },
   },
   {
     files: ["**/*.ts"],
