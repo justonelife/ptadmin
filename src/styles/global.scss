@@ -2,6 +2,7 @@
 @use "./mixins";
 @use "./tailwindcss/custom";
 @use "./material/custom" as materialCustom;
+@use "./components/tabs";
 
 $export-config: (
   "radius": variables.$radius,

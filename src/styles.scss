@@ -41,13 +41,13 @@
         var(--app-color-white)),
       outline-color: light-dark(var(--color-orange-700), var(--app-color-white)),
     ));
-  @include mat.tabs-overrides((background-color: pink,
-      active-focus-indicator-color: var(--color-white),
-      active-indicator-color: var(--color-white),
-      active-hover-indicator-color: var(--color-white),
-      active-indicator-height: 30px,
-      active-indicator-shape: 10px,
-    ));
+  // @include mat.tabs-overrides((background-color: pink,
+  //     active-focus-indicator-color: var(--color-white),
+  //     active-indicator-color: var(--color-white),
+  //     active-hover-indicator-color: var(--color-white),
+  //     active-indicator-height: 30px,
+  //     active-indicator-shape: var(--radius-md),
+  //   ));
 }
 
 html {

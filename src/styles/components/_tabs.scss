@@ -1,0 +1,26 @@
+@use "@angular/material" as mat;
+
+:root {
+  @include mat.tabs-overrides((active-focus-indicator-color: var(--color-white),
+      active-indicator-color: var(--color-white),
+      active-hover-indicator-color: var(--color-white),
+      active-indicator-height: 32px,
+      active-indicator-shape: var(--radius-md),
+      container-height: 40px,
+    ));
+}
+
+.mdc-tab-indicator--active .mdc-tab-indicator__content {
+  //NOTE: lack of variable
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--app-color-shadow);
+}
+
+.mdc-tab-indicator__content--underline {
+  align-self: center !important;
+}
+
+.mat-mdc-tab-label-container {
+  background-color: var(--color-gray-100);
+  border-radius: var(--radius-sm);
+  padding: 0 4px;
+}
