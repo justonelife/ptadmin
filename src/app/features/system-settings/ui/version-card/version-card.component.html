@@ -1,5 +1,14 @@
-<lib-card header="Admin Version">
-  <p>Check our documentation for detailed guides on creating products.</p>
+<lib-card>
+  <ng-template #header>
+    <span class="font-medium text-sm inline-flex gap-1 items-center">
+      <span libIconPosition="center left" [icon]="icon()" iconSet="outlined" class="text-blue-500">
+      </span>
+      <span class="fg-primary">
+        {{ label() }}
+      </span>
+    </span>
+  </ng-template>
+  <p>2.12.0</p>
   <br />
   <a type="button" hys-button routerLink="#" severity="neutral" class="bg-white">View Docs</a>
 </lib-card>

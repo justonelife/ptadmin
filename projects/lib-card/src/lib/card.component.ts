@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChild, input, TemplateRef } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { Appearance } from './types';
 import {
@@ -9,15 +10,27 @@ import {
 
 @Component({
   selector: 'lib-card',
-  imports: [MatCardModule, SeverityDirective, LibIconPositionDirective],
+  imports: [
+    MatCardModule,
+    SeverityDirective,
+    LibIconPositionDirective,
+    NgTemplateOutlet
+  ],
   template: `
     <mat-card libSeverity [severity]="severity()" [appearance]="appearance()">
-      @if (header(); as _header) {
+      @if (headerTemplate(); as _headerTemplate) {
+        <mat-card-header class="mb-8">
+          <mat-card-title>
+            <ng-container *ngTemplateOutlet="_headerTemplate"></ng-container>
+          </mat-card-title>
+        </mat-card-header>
+      }
+      @else if (header(); as _header) {
         <mat-card-header class="mb-8">
           <mat-card-title>
             <span
               libIconPosition="center left"
-              icon="dns"
+              [icon]="headerIcon()"
               iconSet="outlined"
               class="font-semibold text-sm fg-primary"
             >
@@ -33,6 +46,10 @@ import {
 })
 export class CardComponent {
   appearance = input<Appearance>('outlined');
-  header = input<string>();
   severity = input<AppSeverity>('info');
+
+  header = input<string>();
+  headerIcon = input<string>('');
+  headerTemplate = contentChild<TemplateRef<unknown>>('header');
+
 }
