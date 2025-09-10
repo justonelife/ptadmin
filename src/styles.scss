@@ -4,53 +4,89 @@
 
 :root {
   font-size: 14px;
-  @include mat.card-overrides((outlined-container-shape: var(--radius-md),
+  @include mat.card-overrides(
+    (
+      outlined-container-shape: var(--radius-md),
       elevated-container-shape: var(--radius-md),
-      outlined-container-color: light-dark(var(--app-color-white),
-        var(--app-color-black)),
-      outlined-outline-color: light-dark(var(--app-color-light-gray),
-        var(--app-color-dark-gray)),
-      elevated-container-color: light-dark(var(--app-color-white),
-        var(--app-color-black)),
-    ));
-  @include mat.table-overrides((background-color: light-dark(var(--app-color-white),
-        var(--app-color-black)),
-      row-item-outline-color: var(--mdc-outlined-card-outline-color,
-        var(--mat-sys-outline-variant)),
-    ));
-  @include mat.form-field-overrides((outlined-outline-width: 0,
+      outlined-container-color: light-dark(
+          var(--app-color-white),
+          var(--app-color-black)
+        ),
+      outlined-outline-color: light-dark(
+          var(--app-color-light-gray),
+          var(--app-color-dark-gray)
+        ),
+      elevated-container-color: light-dark(
+          var(--app-color-white),
+          var(--app-color-black)
+        ),
+    )
+  );
+  @include mat.table-overrides(
+    (
+      background-color: light-dark(
+          var(--app-color-white),
+          var(--app-color-black)
+        ),
+      row-item-outline-color: var(
+          --mdc-outlined-card-outline-color,
+          var(--mat-sys-outline-variant)
+        ),
+    )
+  );
+  @include mat.form-field-overrides(
+    (
+      outlined-outline-width: 0,
       outlined-focus-outline-width: 0,
       container-height: 100%,
       container-vertical-padding: 4px,
-    ));
-  @include mat.button-toggle-overrides((shape: var(--radius-md),
+    )
+  );
+  @include mat.button-toggle-overrides(
+    (
+      shape: var(--radius-md),
       background-color: transparent,
-      selected-state-background-color: light-dark(var(--app-color-white),
-        var(--app-color-black)),
+      selected-state-background-color: light-dark(
+          var(--app-color-white),
+          var(--app-color-black)
+        ),
       height: 30px,
       text-color: var(--color-gray-400),
       selected-state-text-color: inherit,
       divider-color: transparent,
-    ));
-  @include mat.sidenav-overrides((container-shape: 0,
+    )
+  );
+  @include mat.sidenav-overrides(
+    (
+      container-shape: 0,
       content-background-color: var(--app-color-white),
-    ));
-  @include mat.chips-overrides((container-shape-radius: var(--radius-full),
+    )
+  );
+  @include mat.chips-overrides(
+    (
+      container-shape-radius: var(--radius-full),
       container-height: 22px,
-      label-text-color: light-dark(var(--color-orange-700),
-        var(--app-color-white)),
+      label-text-color: light-dark(
+          var(--color-orange-700),
+          var(--app-color-white)
+        ),
       outline-color: light-dark(var(--color-orange-700), var(--app-color-white)),
-    ));
+    )
+  );
 }
 
 html {
   color-scheme: light;
-  @include mat.theme((color: (primary: app-theme.$primary-palette,
+  @include mat.theme(
+    (
+      color: (
+        primary: app-theme.$primary-palette,
         tertiary: app-theme.$tertiary-palette,
       ),
       typography: "Rubik",
       density: 0,
-    ));
+    )
+  );
 
   .lib-controller {
     .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {

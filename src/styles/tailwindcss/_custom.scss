@@ -4,10 +4,8 @@
 
 @layer utility {
   .bg-primary {
-    background-color: light-dark(
-      var(--app-color-white),
-      var(--app-color-black)
-    );
+    background-color: light-dark(var(--app-color-white),
+        var(--app-color-black));
   }
 
   .fg-primary {
@@ -20,23 +18,23 @@
     // @apply bg-gray-50 dark:bg-neutral-700;
   }
 
+  .fg-secondary {
+    color: light-dark(var(--color-gray-400), #020618);
+  }
+
   .bg-gradient {
     background: #16a2f9;
-    background: linear-gradient(
-      90deg,
-      rgba(22, 162, 249, 1) 0%,
-      rgba(88, 68, 239, 1) 100%
-    );
+    background: linear-gradient(90deg,
+        rgba(22, 162, 249, 1) 0%,
+        rgba(88, 68, 239, 1) 100%);
   }
 
   .text-gradient {
     color: transparent;
     background: #16a2f9;
-    background: linear-gradient(
-      90deg,
-      rgba(22, 162, 249, 1) 0%,
-      rgba(88, 68, 239, 1) 100%
-    );
+    background: linear-gradient(90deg,
+        rgba(22, 162, 249, 1) 0%,
+        rgba(88, 68, 239, 1) 100%);
     background-clip: text;
     -webkit-background-clip: text;
   }

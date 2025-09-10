@@ -321,6 +321,42 @@
           }
         }
       }
+    },
+    "lib-chip": {
+      "projectType": "library",
+      "root": "projects/lib-chip",
+      "sourceRoot": "projects/lib-chip/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/lib-chip/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/lib-chip/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/lib-chip/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/lib-chip/**/*.ts",
+              "projects/lib-chip/**/*.html"
+            ],
+            "eslintConfig": "projects/lib-chip/eslint.config.js"
+          }
+        }
+      }
     }
   }
 }

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, contentChild, input, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  input,
+  TemplateRef,
+} from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { Appearance } from './types';
@@ -14,7 +20,7 @@ import {
     MatCardModule,
     SeverityDirective,
     LibIconPositionDirective,
-    NgTemplateOutlet
+    NgTemplateOutlet,
   ],
   template: `
     <mat-card libSeverity [severity]="severity()" [appearance]="appearance()">
@@ -24,8 +30,7 @@ import {
             <ng-container *ngTemplateOutlet="_headerTemplate"></ng-container>
           </mat-card-title>
         </mat-card-header>
-      }
-      @else if (header(); as _header) {
+      } @else if (header()) {
         <mat-card-header class="mb-8">
           <mat-card-title>
             <span
@@ -34,7 +39,7 @@ import {
               iconSet="outlined"
               class="font-semibold text-sm fg-primary"
             >
-              {{ _header }}
+              {{ header() }}
             </span>
           </mat-card-title>
         </mat-card-header>
@@ -51,5 +56,4 @@ export class CardComponent {
   header = input<string>();
   headerIcon = input<string>('');
   headerTemplate = contentChild<TemplateRef<unknown>>('header');
-
 }

@@ -1,0 +1,24 @@
+<lib-card appearance="raised">
+  <ng-template #header>
+    <span class="font-medium text-base inline-flex gap-1 items-center">
+      <span libIconPosition="center left" icon="dns" iconSet="outlined" class="text-blue-500"></span>
+      <span class="fg-primary">Backend Services</span>
+    </span>
+    <br />
+    <span class="text-sm text-gray-400">
+      Core system components and their current versions
+    </span>
+  </ng-template>
+  <div class="grid grid-cols-2 gap-4">
+    @for (service of services(); track $index) {
+    <div class="inline-flex justify-between items-center rounded px-4 py-2 bg-gray-100">
+      <span>
+        {{ service.name }}
+        <br>
+        <span class="fg-secondary text-sm">{{ service.version }}</span>
+      </span>
+      <lib-chip iconPosition="center left" icon="verified" iconSet="outlined" severity="secondary">Latest</lib-chip>
+    </div>
+    }
+  </div>
+</lib-card>

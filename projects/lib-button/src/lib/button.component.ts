@@ -52,6 +52,7 @@ class OutlinedVariantResolver implements IVariantResolve {
 }
 
 @Component({
+  /* eslint-disable @angular-eslint/component-selector */
   selector: 'a[lib-button], button[lib-button]',
   template: `
     <ng-content />

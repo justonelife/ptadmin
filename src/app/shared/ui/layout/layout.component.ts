@@ -1,9 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { LibButtonComponent } from '@libs/lib-button';
 import { LibSidenavLayoutComponent } from '@libs/lib-layouts';
 import { APP_MENU, AppStore } from '@shared/data-access';
-import { IsLightThemePipe } from '@shared/data-access/pipes';
 import { AppLogoComponent } from '../logo/logo.component';
 
 @Component({
@@ -11,8 +9,6 @@ import { AppLogoComponent } from '../logo/logo.component';
   imports: [
     LibSidenavLayoutComponent,
     RouterOutlet,
-    LibButtonComponent,
-    IsLightThemePipe,
     AppLogoComponent,
     RouterLink,
   ],
