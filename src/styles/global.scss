@@ -3,10 +3,13 @@
 @use "./tailwindcss/custom";
 @use "./material/custom" as materialCustom;
 @use "./components/tabs";
+@use "./components/card";
 
 $export-config: (
   "radius": variables.$radius,
   "app-color": variables.$color,
+  "font-size": variables.$fontSize,
+  "font-weight": variables.$fontWeight,
 );
 
 @include mixins.export-root-from-config($export-config);

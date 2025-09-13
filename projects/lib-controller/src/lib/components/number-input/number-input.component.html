@@ -1,18 +1,10 @@
 @if (label(); as _label) {
-  <span class="text-xs font-semibold fg-primary mb-3 block">
-    {{ _label }}
-  </span>
+<span class="lib-controller__label text-md fg-primary mb-3 block">
+  {{ _label }}
+</span>
 }
 
 <mat-form-field subscriptSizing="dynamic">
-  <input
-    matInput
-    type="number"
-    [(ngModel)]="state"
-    class="w-full h-full focus:outline-none"
-    [placeholder]="placeholder()"
-    (ngModelChange)="onChange(state)"
-    [min]="min()"
-    [max]="max()"
-  />
+  <input matInput type="number" [(ngModel)]="state" class="w-full h-full focus:outline-none"
+    [placeholder]="placeholder()" (ngModelChange)="onChange(state)" [min]="min()" [max]="max()" />
 </mat-form-field>

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { CardComponent } from '@libs/lib-card';
+import { LibCardComponent } from '@libs/lib-card';
 import { LibIconPositionDirective } from '@libs/lib-core';
 import { LibChipComponent } from '@libs/lib-chip';
 
 @Component({
-  imports: [CardComponent, LibIconPositionDirective, LibChipComponent],
+  imports: [LibCardComponent, LibIconPositionDirective, LibChipComponent],
   selector: 'app-version-card-view',
   templateUrl: './version-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

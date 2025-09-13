@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { CardComponent } from '@libs/lib-card';
+import { LibCardComponent } from '@libs/lib-card';
 import { LibChipComponent } from '@libs/lib-chip';
 import { LibIconPositionDirective } from '@libs/lib-core';
 
@@ -9,7 +9,7 @@ interface BackendService {
 }
 
 @Component({
-  imports: [CardComponent, LibIconPositionDirective, LibChipComponent],
+  imports: [LibCardComponent, LibIconPositionDirective, LibChipComponent],
   selector: 'app-backend-services-card-view',
   templateUrl: './backend-services-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

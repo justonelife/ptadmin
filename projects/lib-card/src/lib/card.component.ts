@@ -24,36 +24,55 @@ import {
   ],
   template: `
     <mat-card libSeverity [severity]="severity()" [appearance]="appearance()">
-      @if (headerTemplate(); as _headerTemplate) {
-        <mat-card-header class="mb-8">
+      <mat-card-header>
+        @if (titleTemplate(); as _titleTemplate) {
           <mat-card-title>
-            <ng-container *ngTemplateOutlet="_headerTemplate"></ng-container>
+            <ng-container *ngTemplateOutlet="_titleTemplate"></ng-container>
           </mat-card-title>
-        </mat-card-header>
-      } @else if (header()) {
-        <mat-card-header class="mb-8">
-          <mat-card-title>
-            <span
-              libIconPosition="center left"
-              [icon]="headerIcon()"
-              iconSet="outlined"
-              class="font-semibold text-sm fg-primary"
-            >
-              {{ header() }}
-            </span>
+        } @else if (title()) {
+          <!-- NOTE: flex! for icon position working properly-->
+          <mat-card-title
+            libIconPosition="center left"
+            [icon]="titleIcon()"
+            iconSet="outlined"
+            class="flex!"
+          >
+            {{ title() }}
           </mat-card-title>
-        </mat-card-header>
-      }
+        }
+
+        @if (subTitleTemplate(); as _subTitleTemplate) {
+          <mat-card-subtitle>
+            <ng-container *ngTemplateOutlet="_subTitleTemplate"></ng-container>
+          </mat-card-subtitle>
+        } @else if (subTitle()) {
+          <mat-card-subtitle>
+            {{ subTitle() }}
+          </mat-card-subtitle>
+        }
+      </mat-card-header>
       <mat-card-content><ng-content></ng-content></mat-card-content>
     </mat-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [
+    `
+      :host ::ng-deep {
+        .mat-mdc-card-header-text {
+          width: 100%;
+        }
+      }
+    `
+  ]
 })
-export class CardComponent {
+export class LibCardComponent {
   appearance = input<Appearance>('outlined');
   severity = input<AppSeverity>('info');
 
-  header = input<string>();
-  headerIcon = input<string>('');
-  headerTemplate = contentChild<TemplateRef<unknown>>('header');
+  titleTemplate = contentChild<TemplateRef<unknown>>('title');
+  title = input<string>();
+  titleIcon = input<string>('');
+
+  subTitle = input<string>();
+  subTitleTemplate = contentChild<TemplateRef<unknown>>('subTitle');
 }

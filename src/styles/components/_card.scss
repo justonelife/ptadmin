@@ -1,0 +1,27 @@
+@use "@angular/material" as mat;
+
+:root {
+  @include mat.card-overrides(
+    (
+      outlined-container-shape: var(--radius-md),
+      elevated-container-shape: var(--radius-md),
+      outlined-container-color: light-dark(
+          var(--app-color-white),
+          var(--app-color-black)
+        ),
+      outlined-outline-color: light-dark(
+          var(--app-color-light-gray),
+          var(--app-color-dark-gray)
+        ),
+      elevated-container-color: light-dark(
+          var(--app-color-white),
+          var(--app-color-black)
+        ),
+      subtitle-text-size: var(--font-size-normal),
+      subtitle-text-weight: var(--font-weight-normal),
+      subtitle-text-color: var(--app-color-secondary),
+      title-text-size: var(--font-size-large),
+      title-text-weight: var(--font-weight-semibold),
+    )
+  );
+}

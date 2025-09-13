@@ -1,19 +1,14 @@
 @if (label(); as _label) {
-  <span class="text-xs font-semibold text-gray-800 mb-3 block">
-    {{ _label }}
-  </span>
+<span class="lib-controller__label text-md text-gray-800 mb-3 block">
+  {{ _label }}
+</span>
 }
 
 <mat-form-field subscriptSizing="dynamic">
-  <mat-select
-    [placeholder]="placeholder()"
-    [(ngModel)]="state"
-    (ngModelChange)="onChange(state)"
-    [disabled]="disabled()"
-    [multiple]="multiple()"
-  >
+  <mat-select [placeholder]="placeholder()" [(ngModel)]="state" (ngModelChange)="onChange(state)"
+    [disabled]="disabled()" [multiple]="multiple()">
     @for (option of options(); track option) {
-      <mat-option [value]="option.value">{{ option.label }}</mat-option>
+    <mat-option [value]="option.value">{{ option.label }}</mat-option>
     }
   </mat-select>
 </mat-form-field>

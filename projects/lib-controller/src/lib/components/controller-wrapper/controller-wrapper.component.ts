@@ -5,7 +5,7 @@ import { LibIconPositionDirective, IconCombinePosition } from '@libs/lib-core';
   selector: 'lib-controller-wrapper',
   template: `
     @if (label(); as _label) {
-      <span class="text-md font-semibold fg-primary mb-3 block">
+      <span class="text-md fg-primary block">
         {{ _label }}
       </span>
     }

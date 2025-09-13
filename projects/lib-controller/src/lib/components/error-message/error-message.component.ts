@@ -46,7 +46,7 @@ export function provideRecordErrorMessages(
   selector: 'lib-error-message',
   templateUrl: './error-message.component.html',
   host: {
-    '[class.opacity-0]': 'isValid()',
+    '[class.hidden!]': 'isValid()',
     class: 'flex items-center gap-1 text-sm text-red-500 font-bold',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -4,24 +4,6 @@
 
 :root {
   font-size: 14px;
-  @include mat.card-overrides(
-    (
-      outlined-container-shape: var(--radius-md),
-      elevated-container-shape: var(--radius-md),
-      outlined-container-color: light-dark(
-          var(--app-color-white),
-          var(--app-color-black)
-        ),
-      outlined-outline-color: light-dark(
-          var(--app-color-light-gray),
-          var(--app-color-dark-gray)
-        ),
-      elevated-container-color: light-dark(
-          var(--app-color-white),
-          var(--app-color-black)
-        ),
-    )
-  );
   @include mat.table-overrides(
     (
       background-color: light-dark(
