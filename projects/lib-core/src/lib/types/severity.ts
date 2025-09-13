@@ -4,4 +4,5 @@ export type AppSeverity =
   | 'danger'
   | 'primary'
   | 'secondary'
-  | 'warning';
+  | 'warning'
+  | 'success';

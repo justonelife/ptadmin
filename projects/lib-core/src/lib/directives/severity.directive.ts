@@ -17,6 +17,7 @@ export class SeverityDirective {
     secondary:
       'rounded-full px-2.5 py-0.5 font-semibold focus:outline-none bg-slate-800 hover:bg-slate-700 text-white',
     warning: 'bg-orange-50! text-orange-700 border-orange-200!',
+    success: 'bg-green-50 border-green-200 border text-green-700',
   };
 
   severity = input<AppSeverity>('primary');
