@@ -2,7 +2,11 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Login } from '@features/auth/data-access';
 import { LibCardComponent } from '@libs/lib-card';
-import { DYNAMIC_TYPE, LibDynamicFormComponent, RecordDynamicField } from '@libs/lib-controller';
+import {
+  DYNAMIC_TYPE,
+  LibDynamicFormComponent,
+  RecordDynamicField,
+} from '@libs/lib-controller';
 import { AppTypedForm } from '@libs/lib-core';
 
 @Component({
@@ -25,8 +29,8 @@ export class LoginComponent<T extends Login = Login> {
       iconSet: 'outlined',
       styleClass: 'col-span-12',
       inputs: {
-        placeholder: 'Enter your email'
-      }
+        placeholder: 'Enter your email',
+      },
     },
     password: {
       label: 'Password',
@@ -36,9 +40,9 @@ export class LoginComponent<T extends Login = Login> {
       iconSet: 'outlined',
       styleClass: 'col-span-12',
       inputs: {
-        placeholder: 'Enter your password'
-      }
-    }
+        placeholder: 'Enter your password',
+      },
+    },
   };
   form = input.required<AppTypedForm<T>>();
 }
