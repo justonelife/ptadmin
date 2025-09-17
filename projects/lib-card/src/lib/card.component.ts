@@ -62,8 +62,8 @@ import {
           width: 100%;
         }
       }
-    `
-  ]
+    `,
+  ],
 })
 export class LibCardComponent {
   appearance = input<Appearance>('outlined');

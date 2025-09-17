@@ -1,7 +1,12 @@
 <lib-card appearance="raised">
   <ng-template #title>
     <span class="font-medium text-base inline-flex gap-1 items-center">
-      <span libIconPosition="center left" [icon]="icon()" iconSet="outlined" [class]="iconClass()"></span>
+      <span
+        libIconPosition="center left"
+        [icon]="icon()"
+        iconSet="outlined"
+        [class]="iconClass()"
+      ></span>
       <span class="fg-primary">
         {{ label() }}
       </span>
@@ -11,7 +16,14 @@
     <p class="text-2xl font-bold truncate">
       {{ version() }}
     </p>
-    <lib-chip class="w-full" iconPosition="center left" icon="verified" iconSet="outlined"
-      severity="success">Latest</lib-chip>
+    <lib-chip
+      class="w-full"
+      iconPosition="center left"
+      icon="verified"
+      iconSet="outlined"
+      severity="success"
+    >
+      Latest
+    </lib-chip>
   </div>
 </lib-card>

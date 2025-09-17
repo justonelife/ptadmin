@@ -4,13 +4,21 @@ import { Login } from '@features/auth/data-access';
 import { LibCardComponent } from '@libs/lib-card';
 import {
   DYNAMIC_TYPE,
+  LibDynamicControllerTemplate,
   LibDynamicFormComponent,
+  LibPasswordInputComponent,
   RecordDynamicField,
 } from '@libs/lib-controller';
 import { AppTypedForm } from '@libs/lib-core';
 
 @Component({
-  imports: [LibCardComponent, LibDynamicFormComponent, ReactiveFormsModule],
+  imports: [
+    LibCardComponent,
+    LibDynamicFormComponent,
+    ReactiveFormsModule,
+    LibPasswordInputComponent,
+    LibDynamicControllerTemplate,
+  ],
   selector: 'app-login',
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,7 +42,7 @@ export class LoginComponent<T extends Login = Login> {
     },
     password: {
       label: 'Password',
-      type: DYNAMIC_TYPE.INPUT,
+      type: DYNAMIC_TYPE.CUSTOM,
       withWrapper: true,
       icon: 'lock',
       iconSet: 'outlined',

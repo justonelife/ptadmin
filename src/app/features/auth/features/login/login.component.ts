@@ -12,7 +12,13 @@ import { AppTypedForm } from '@libs/lib-core';
 })
 export class LoginContainerComponent {
   form: AppTypedForm<Login> = new FormGroup({
-    email: new FormControl<string>('', { validators: Validators.required, nonNullable: true }),
-    password: new FormControl<string>('', { validators: Validators.required, nonNullable: true }),
+    email: new FormControl<string>('', {
+      validators: Validators.required,
+      nonNullable: true,
+    }),
+    password: new FormControl<string>('', {
+      validators: Validators.required,
+      nonNullable: true,
+    }),
   });
 }

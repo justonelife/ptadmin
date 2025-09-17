@@ -1,14 +1,11 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { LibIconPositionDirective, IconCombinePosition } from '@libs/lib-core';
+import { LibLabelComponent } from '../label/label.component';
 
 @Component({
   selector: 'lib-controller-wrapper',
   template: `
-    @if (label(); as _label) {
-      <span class="text-md fg-primary block">
-        {{ _label }}
-      </span>
-    }
+    <lib-label [label]="label()"></lib-label>
     <div
       class="
       inline-flex
@@ -34,7 +31,7 @@ import { LibIconPositionDirective, IconCombinePosition } from '@libs/lib-core';
       <ng-content />
     </div>
   `,
-  imports: [LibIconPositionDirective],
+  imports: [LibIconPositionDirective, LibLabelComponent],
   styleUrl: './controller-wrapper.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

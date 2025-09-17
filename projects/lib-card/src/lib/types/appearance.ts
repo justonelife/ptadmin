@@ -1,3 +1,3 @@
-import { MatCardAppearance } from "@angular/material/card";
+import { MatCardAppearance } from '@angular/material/card';
 
 export type Appearance = MatCardAppearance;

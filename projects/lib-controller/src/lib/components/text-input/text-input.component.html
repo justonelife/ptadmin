@@ -1,14 +1,21 @@
-@if (label(); as _label) {
-<span class="lib-controller__label text-md fg-primary block">
-  {{ _label }}
-</span>
-}
+<lib-label [label]="label()"></lib-label>
 
 <mat-form-field subscriptSizing="dynamic">
   @if (type() === "input") {
-  <input matInput type="text" [(ngModel)]="state" class="w-full h-full focus:outline-none" [placeholder]="placeholder()"
-    (ngModelChange)="onChange(state)" />
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="state"
+      class="w-full h-full focus:outline-none"
+      [placeholder]="placeholder()"
+      (ngModelChange)="onChange(state)"
+    />
   } @else {
-  <textarea matInput [(ngModel)]="state" [placeholder]="placeholder()" (ngModelChange)="onChange(state)"></textarea>
+    <textarea
+      matInput
+      [(ngModel)]="state"
+      [placeholder]="placeholder()"
+      (ngModelChange)="onChange(state)"
+    ></textarea>
   }
 </mat-form-field>

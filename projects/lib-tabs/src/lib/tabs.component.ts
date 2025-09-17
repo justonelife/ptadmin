@@ -1,7 +1,7 @@
 import {
   AsyncPipe,
   NgComponentOutlet,
-  NgTemplateOutlet
+  NgTemplateOutlet,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -30,30 +30,29 @@ interface Render {
   selector: 'lib-tabs',
   templateUrl: './tabs.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    MatTabsModule,
-    NgTemplateOutlet,
-    NgComponentOutlet,
-    AsyncPipe,
-  ],
+  imports: [MatTabsModule, NgTemplateOutlet, NgComponentOutlet, AsyncPipe],
 })
 export class LibTabsComponent {
   tabs = input.required<LibTabItem[]>();
   templates = contentChildren(LibTemplateDirective);
 
   mapper = computed<Record<string, Render>>(() => {
-    const templateMapper: Record<string, TemplateRef<unknown>> =
-      Object.fromEntries(
-        this.templates()?.map(t => [t.key(), t.templateRef]) ?? []
-      );
+    const templateMapper: Record<
+      string,
+      TemplateRef<unknown>
+    > = Object.fromEntries(
+      this.templates()?.map((t) => [t.key(), t.templateRef]) ?? []
+    );
 
-    return this.tabs().reduce((acc, cur) =>
-    ({
-      ...acc,
-      [cur.value]: {
-        template: templateMapper[cur.value],
-        component: cur.component
-      }
-    }), {});
+    return this.tabs().reduce(
+      (acc, cur) => ({
+        ...acc,
+        [cur.value]: {
+          template: templateMapper[cur.value],
+          component: cur.component,
+        },
+      }),
+      {}
+    );
   });
 }

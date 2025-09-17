@@ -7,6 +7,12 @@
     <p class="text-center">Enter your credentials to access the admin panel</p>
   </ng-template>
   <form [formGroup]="form()">
-    <lib-dynamic-form [fields]="FIELDS"></lib-dynamic-form>
+    <lib-dynamic-form [fields]="FIELDS">
+      <ng-template libDynamicControllerTemplate="password" let-control>
+        <lib-password-input [formControl]="control"></lib-password-input>
+      </ng-template>
+    </lib-dynamic-form>
   </form>
 </lib-card>
+
+<lib-password-input></lib-password-input>

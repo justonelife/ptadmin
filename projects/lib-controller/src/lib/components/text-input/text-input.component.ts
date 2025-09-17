@@ -4,9 +4,10 @@ import { MatInput } from '@angular/material/input';
 import { LibBaseController } from '../../directives/base-controller.directive';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideControlValueAccessor } from '@libs/lib-core';
+import { LibLabelComponent } from '../label/label.component';
 
 @Component({
-  imports: [FormsModule, MatInput, MatFormFieldModule],
+  imports: [FormsModule, MatInput, MatFormFieldModule, LibLabelComponent],
   selector: 'lib-text-input',
   templateUrl: './text-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
