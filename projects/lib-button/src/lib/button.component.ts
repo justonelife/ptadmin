@@ -7,7 +7,11 @@ import {
   InjectionToken,
   input,
 } from '@angular/core';
-import { LibIconPositionDirective, SeverityDirective } from '@libs/lib-core';
+import {
+  LIB_CLASS_MERGER_SOURCES,
+  LibIconPositionDirective,
+  LibSeverityDirective,
+} from '@libs/lib-core';
 
 type ButtonVariant = 'normal' | 'icon' | 'raised' | 'outlined';
 const VARIANT_RESOLVER = new InjectionToken<IVariantResolve>(
@@ -61,7 +65,7 @@ class OutlinedVariantResolver implements IVariantResolve {
   hostDirectives: [
     {
       inputs: ['severity'],
-      directive: SeverityDirective,
+      directive: LibSeverityDirective,
     },
     {
       inputs: ['libIconPosition', 'icon', 'iconSet'],
@@ -70,7 +74,7 @@ class OutlinedVariantResolver implements IVariantResolve {
   ],
   styleUrl: './button.component.scss',
   host: {
-    '[class]': 'klass()',
+    '[attr.buttonClass]': 'klass()',
   },
   providers: [
     { provide: VARIANT_RESOLVER, useClass: NormalVariantResolver, multi: true },
@@ -80,6 +84,10 @@ class OutlinedVariantResolver implements IVariantResolve {
       provide: VARIANT_RESOLVER,
       useClass: OutlinedVariantResolver,
       multi: true,
+    },
+    {
+      provide: LIB_CLASS_MERGER_SOURCES,
+      useValue: ['severityClass', 'buttonClass', 'class'],
     },
   ],
 })

@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { Appearance } from './types';
 import {
   AppSeverity,
-  SeverityDirective,
+  LibSeverityDirective,
   LibIconPositionDirective,
 } from '@libs/lib-core';
 
@@ -18,7 +18,7 @@ import {
   selector: 'lib-card',
   imports: [
     MatCardModule,
-    SeverityDirective,
+    LibSeverityDirective,
     LibIconPositionDirective,
     NgTemplateOutlet,
   ],

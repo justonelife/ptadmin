@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LibIconPositionDirective, SeverityDirective } from '@libs/lib-core';
+import { LibIconPositionDirective, LibSeverityDirective } from '@libs/lib-core';
 
 @Component({
   selector: 'lib-chip',
@@ -10,7 +10,7 @@ import { LibIconPositionDirective, SeverityDirective } from '@libs/lib-core';
   hostDirectives: [
     {
       inputs: ['severity'],
-      directive: SeverityDirective,
+      directive: LibSeverityDirective,
     },
     {
       inputs: ['libIconPosition:iconPosition', 'icon', 'iconSet'],
