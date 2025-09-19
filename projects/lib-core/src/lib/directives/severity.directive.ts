@@ -24,14 +24,18 @@ import {
 })
 export class LibSeverityDirective {
   readonly CLASS_MAPPER: Record<AppSeverity, string> = {
-    neutral: 'border text-foreground',
-    info: 'border-transparent bg-slate-200 dark:text-zinc-600 hover:bg-slate-100',
-    danger: 'text-red-500! bg-red-200',
-    primary: 'bg-gradient text-white',
+    neutral:
+      'bg-gray-100 border-gray-100 text-gray-900! hover:bg-gray-200 focus-visible:ring-gray-500/50 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700',
+    info: 'bg-cyan-600 border-cyan-600 text-cyan-600 hover:bg-cyan-700 focus-visible:ring-cyan-500/50',
+    danger:
+      'bg-red-600 border-red-600 text-red-600 hover:bg-red-700 focus-visible:ring-red-500/50',
+    primary: 'bg-gradient',
     secondary:
-      'rounded-full px-2.5 py-0.5 font-semibold focus:outline-none bg-slate-800 hover:bg-slate-700 text-white',
-    warning: 'bg-orange-50 text-orange-700 border-orange-200',
-    success: 'bg-green-50 border-green-200 border text-green-700',
+      'bg-gray-600 border-gray-600 text-gray-600 hover:bg-gray-700 focus-visible:ring-gray-500/50',
+    warning:
+      'bg-amber-500 border-amber-500 text-amber-500 hover:bg-amber-600 focus-visible:ring-amber-500/50',
+    success:
+      'bg-green-600 border-green-600 text-green-600 hover:bg-green-700 focus-visible:ring-green-500/50',
   };
 
   severity = input<AppSeverity>('primary');

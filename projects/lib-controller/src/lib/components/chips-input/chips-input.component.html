@@ -1,9 +1,5 @@
-<!-- TODO: add label component -->
-@if (label(); as _label) {
-  <span class="lib-controller__label text-md text-gray-800 mb-3 block">
-    {{ _label }}
-  </span>
-}
+<!--TODO: wired with lib-chip?-->
+<lib-label [label]="label()"></lib-label>
 
 <mat-form-field class="h-auto!">
   <mat-chip-grid #chipGrid [(ngModel)]="state">

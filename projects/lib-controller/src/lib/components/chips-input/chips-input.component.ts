@@ -5,9 +5,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { LibBaseController } from '../../directives/base-controller.directive';
 import { FormsModule } from '@angular/forms';
 import { provideControlValueAccessor } from '@libs/lib-core';
+import { LibLabelComponent } from '../label/label.component';
 
 @Component({
-  imports: [MatFormFieldModule, MatChipsModule, MatIconModule, FormsModule],
+  imports: [
+    MatFormFieldModule,
+    MatChipsModule,
+    MatIconModule,
+    FormsModule,
+    LibLabelComponent,
+  ],
   selector: 'lib-chips-input',
   templateUrl: './chips-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

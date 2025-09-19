@@ -27,6 +27,11 @@ export function provideComponentControlResolver<
     { provide: COMPONENT_RESOLVER, useClass: MultipleResolver, multi: true },
     { provide: COMPONENT_RESOLVER, useClass: ChipsInputResolver, multi: true },
     { provide: COMPONENT_RESOLVER, useClass: NumberInputResolver, multi: true },
+    {
+      provide: COMPONENT_RESOLVER,
+      useClass: PasswordInputResolver,
+      multi: true,
+    },
   ]);
 }
 
@@ -117,6 +122,18 @@ export class NumberInputResolver implements ComponentResolver {
       component: import(
         '../components/number-input/number-input.component'
       ).then((c) => c.LibNumberInputComponent),
+    };
+  }
+}
+
+@Injectable()
+export class PasswordInputResolver implements ComponentResolver {
+  type = DYNAMIC_TYPE.PASSWORD_INPUT;
+  resolve(): ResolveType {
+    return {
+      component: import(
+        '../components/password-input/password-input.component'
+      ).then((c) => c.LibPasswordInputComponent),
     };
   }
 }

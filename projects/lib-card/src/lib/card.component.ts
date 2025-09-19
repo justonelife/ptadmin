@@ -67,7 +67,8 @@ import {
 })
 export class LibCardComponent {
   appearance = input<Appearance>('outlined');
-  severity = input<AppSeverity>('info');
+  //TODO: use severity directive?
+  severity = input<AppSeverity>('neutral');
 
   titleTemplate = contentChild<TemplateRef<unknown>>('title');
   title = input<string>();

@@ -7,15 +7,9 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "paths": {
-      "@features/*": [
-        "./src/app/features/*"
-      ],
-      "@shared/*": [
-        "./src/app/shared/*"
-      ],
-      "@libs/*": [
-        "./projects/*/src/public-api.ts"
-      ]
+      "@features/*": ["./src/app/features/*"],
+      "@shared/*": ["./src/app/shared/*"],
+      "@libs/*": ["./projects/*/src/public-api.ts"]
     },
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -76,6 +70,12 @@
     },
     {
       "path": "./projects/lib-chip/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/lib-overlay/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/lib-overlay/tsconfig.spec.json"
     }
   ]
 }

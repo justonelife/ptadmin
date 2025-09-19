@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Login } from '@features/auth/data-access';
 import { LoginComponent } from '@features/auth/ui/login/login.component';
 import { AppTypedForm } from '@libs/lib-core';
+import { LibAlertService } from '@libs/lib-overlay';
 
 @Component({
   imports: [LoginComponent],
@@ -11,6 +12,8 @@ import { AppTypedForm } from '@libs/lib-core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginContainerComponent {
+  readonly alertService = inject(LibAlertService);
+
   form: AppTypedForm<Login> = new FormGroup({
     email: new FormControl<string>('', {
       validators: Validators.required,
@@ -21,4 +24,8 @@ export class LoginContainerComponent {
       nonNullable: true,
     }),
   });
+
+  alert(): void {
+    this.alertService.success();
+  }
 }

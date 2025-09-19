@@ -27,7 +27,7 @@ interface IVariantResolve {
 class NormalVariantResolver implements IVariantResolve {
   variant: ButtonVariant = 'normal';
   getClass(): string {
-    return '';
+    return 'text-white';
   }
 }
 
@@ -35,7 +35,7 @@ class NormalVariantResolver implements IVariantResolve {
 class IconVariantResolver implements IVariantResolve {
   variant: ButtonVariant = 'icon';
   getClass(): string {
-    return 'lib-bg-transparent text-black! dark:text-white! px-1!';
+    return 'bg-transparent text-black dark:text-white aspect-square px-1!';
   }
 }
 
@@ -43,23 +43,27 @@ class IconVariantResolver implements IVariantResolve {
 class RaisedVariantResolver implements IVariantResolve {
   variant: ButtonVariant = 'raised';
   getClass(): string {
-    return 'shadow-lg';
+    return 'shadow-lg text-white';
   }
 }
 
+//FIXME: variant outlined + severity primary bugging
 @Injectable()
 class OutlinedVariantResolver implements IVariantResolve {
   variant: ButtonVariant = 'outlined';
   getClass(): string {
-    return 'lib-bg-transparent border border-gray-300 text-black! dark:text-white!';
+    return 'bg-transparent border hover:text-white text-black dark:text-white';
   }
 }
 
 @Component({
+  //FIXME: set lint-staged in package.json to max-warnings=0
   /* eslint-disable @angular-eslint/component-selector */
   selector: 'a[lib-button], button[lib-button]',
   template: `
-    <ng-content />
+    @if (variant() !== 'icon') {
+      <ng-content />
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [
