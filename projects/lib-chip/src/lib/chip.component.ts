@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LibIconPositionDirective, LibSeverityDirective } from '@libs/lib-core';
+import {
+  LIB_CLASS_MERGER_SOURCES,
+  LibIconPositionDirective,
+  LibSeverityDirective,
+} from '@libs/lib-core';
 
 @Component({
   selector: 'lib-chip',
@@ -18,7 +22,13 @@ import { LibIconPositionDirective, LibSeverityDirective } from '@libs/lib-core';
     },
   ],
   host: {
-    class: `inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors`,
+    class: `inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors text-white`,
   },
+  providers: [
+    {
+      provide: LIB_CLASS_MERGER_SOURCES,
+      useValue: ['severityClass', 'class'],
+    },
+  ],
 })
 export class LibChipComponent {}

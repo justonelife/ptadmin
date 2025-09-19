@@ -4,7 +4,7 @@ import { Overlay, OverlayPositionBuilder } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
 export interface IAlertService {
-  success(message: string): void;
+  success(message: string, title: string): void;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -18,7 +18,7 @@ export class LibAlertService implements IAlertService {
   }
 
   //TODO: add string | TemplateRef
-  success(message = 'Success'): void {
+  success(message = '', title = 'Success'): void {
     console.log(message);
     console.log(this.overlay);
 
@@ -28,7 +28,9 @@ export class LibAlertService implements IAlertService {
 
     const alertPortal = new ComponentPortal(this.component);
 
-    overlayRef.attach(alertPortal);
+    const alertRef = overlayRef.attach(alertPortal);
+    alertRef.setInput('title', title);
+    alertRef.setInput('message', 'Custom message');
 
     // console.log(this.host);
   }

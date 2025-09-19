@@ -5,7 +5,10 @@
   <ng-template #subTitle>
     <p class="text-center">Enter your credentials to access the admin panel</p>
   </ng-template>
-  <form [formGroup]="form()">
+  <form [formGroup]="form()" (ngSubmit)="onSubmit()">
     <lib-dynamic-form [fields]="FIELDS"></lib-dynamic-form>
+    <div class="flex gap-4 w-full mt-6">
+      <button lib-button type="submit" class="w-full">Login</button>
+    </div>
   </form>
 </lib-card>

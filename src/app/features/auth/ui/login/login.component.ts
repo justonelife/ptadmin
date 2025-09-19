@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Login } from '@features/auth/data-access';
+import { LibButtonComponent } from '@libs/lib-button';
 import { LibCardComponent } from '@libs/lib-card';
 import {
   DYNAMIC_TYPE,
@@ -10,7 +16,12 @@ import {
 import { AppTypedForm } from '@libs/lib-core';
 
 @Component({
-  imports: [LibCardComponent, LibDynamicFormComponent, ReactiveFormsModule],
+  imports: [
+    LibCardComponent,
+    LibDynamicFormComponent,
+    ReactiveFormsModule,
+    LibButtonComponent,
+  ],
   selector: 'app-login',
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,6 +30,8 @@ import { AppTypedForm } from '@libs/lib-core';
   },
 })
 export class LoginComponent<T extends Login = Login> {
+  login = output<T>();
+
   //TODO: RecordDynamicField should accept Login interface and compute possible FieldKey
   readonly FIELDS: RecordDynamicField = {
     email: {
@@ -45,4 +58,8 @@ export class LoginComponent<T extends Login = Login> {
     },
   };
   form = input.required<AppTypedForm<T>>();
+
+  onSubmit(): void {
+    this.login.emit(this.form().value as T);
+  }
 }
