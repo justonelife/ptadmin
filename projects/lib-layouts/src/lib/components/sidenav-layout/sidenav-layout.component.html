@@ -7,7 +7,13 @@
       <header
         class="flex justify-between items-center p-2 border-b border-stone-300 dark:border-stone-800 sticky w-full top-0 z-999 bg-primary"
       >
-        <button lib-button variant="icon" icon="sort" (click)="open()"></button>
+        <button
+          lib-button
+          appearance="ghost"
+          severity="neutral"
+          icon="sort"
+          (click)="open()"
+        ></button>
       </header>
       <ng-container *ngTemplateOutlet="_main"></ng-container>
     </div>
@@ -33,7 +39,8 @@
       >
         <button
           lib-button
-          variant="icon"
+          appearance="ghost"
+          severity="neutral"
           [icon]="_sidebarCollapsed ? 'menu' : 'menu_open'"
           (click)="toggleDesktopSidebarState()"
         ></button>

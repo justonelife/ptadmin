@@ -20,7 +20,7 @@ export class LibAppearanceDirective {
     outlined: 'rounded-md bg-transparent hover:bg-current/10 border',
     raised: 'rounded-md shadow-lg text-white shadow-black/40',
     soft: 'rounded-md bg-current/20 hover:bg-current/30 border',
-    ghost: 'rounded-md bg-transparent hover:bg-current/10',
+    ghost: 'rounded-md bg-transparent hover:bg-transparent',
   };
 
   appearance = input<LibAppearance>('filled', { alias: 'libAppearance' });

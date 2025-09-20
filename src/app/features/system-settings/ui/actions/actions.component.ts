@@ -5,7 +5,13 @@ import { LibButtonComponent } from '@libs/lib-button';
   imports: [LibButtonComponent],
   selector: 'app-system-settings-actions',
   template: `
-    <button lib-button variant="outlined" icon="sync" iconSet="outlined">
+    <button
+      lib-button
+      appearance="outlined"
+      severity="neutral"
+      icon="sync"
+      iconSet="outlined"
+    >
       Check Updates
     </button>
   `,
