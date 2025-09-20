@@ -9,6 +9,7 @@
             [icon]="item.icon"
             [iconSet]="item.iconSet || ''"
           >
+            <!-- TODO: consider DOM portal -->
             <ng-container
               *ngTemplateOutlet="
                 fieldFactory;

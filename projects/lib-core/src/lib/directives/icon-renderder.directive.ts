@@ -154,6 +154,28 @@ export class CenterRightIconRenderer extends AbstractIconRenderer {
   }
 }
 
+@Injectable()
+export class TopLeftIconRenderer extends AbstractIconRenderer {
+  readonly position = 'top left';
+
+  protected override setup(container: HTMLElement): void {
+    this.helper.addClasses(
+      this.renderer,
+      this.el.nativeElement,
+      'flex',
+      'gap-2'
+    );
+    this.helper.addClasses(
+      this.renderer,
+      container,
+      'order-first',
+      'h-full',
+      'flex',
+      'items-start'
+    );
+  }
+}
+
 @Directive({
   selector: '[libIconPosition]',
   standalone: true,
@@ -165,6 +187,7 @@ export class CenterRightIconRenderer extends AbstractIconRenderer {
     },
     { provide: ICON_RENDERER, useClass: CenterLeftIconRenderer, multi: true },
     { provide: ICON_RENDERER, useClass: CenterRightIconRenderer, multi: true },
+    { provide: ICON_RENDERER, useClass: TopLeftIconRenderer, multi: true },
   ],
 })
 export class LibIconPositionDirective {
