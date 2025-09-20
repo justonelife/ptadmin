@@ -13,7 +13,7 @@ import {
   LibDynamicFormComponent,
   RecordDynamicField,
 } from '@libs/lib-controller';
-import { AppTypedForm } from '@libs/lib-core';
+import { LibTypedForm } from '@libs/lib-core';
 
 @Component({
   imports: [
@@ -57,7 +57,7 @@ export class LoginComponent<T extends Login = Login> {
       },
     },
   };
-  form = input.required<AppTypedForm<T>>();
+  form = input.required<LibTypedForm<T>>();
 
   onSubmit(): void {
     this.login.emit(this.form().value as T);

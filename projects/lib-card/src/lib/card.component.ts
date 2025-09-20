@@ -9,7 +9,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { Appearance } from './types';
 import {
-  AppSeverity,
+  LibSeverity,
   LibSeverityDirective,
   LibIconPositionDirective,
 } from '@libs/lib-core';
@@ -23,7 +23,7 @@ import {
     NgTemplateOutlet,
   ],
   template: `
-    <mat-card libSeverity [severity]="severity()" [appearance]="appearance()">
+    <mat-card [libSeverity]="severity()" [appearance]="appearance()">
       <mat-card-header>
         @if (titleTemplate(); as _titleTemplate) {
           <mat-card-title>
@@ -68,7 +68,7 @@ import {
 export class LibCardComponent {
   appearance = input<Appearance>('outlined');
   //TODO: use severity directive?
-  severity = input<AppSeverity>('neutral');
+  severity = input<LibSeverity>('neutral');
 
   titleTemplate = contentChild<TemplateRef<unknown>>('title');
   title = input<string>();

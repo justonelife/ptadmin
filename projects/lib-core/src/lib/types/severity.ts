@@ -1,4 +1,4 @@
-export type AppSeverity =
+export type LibSeverity =
   | 'neutral'
   | 'info'
   | 'danger'

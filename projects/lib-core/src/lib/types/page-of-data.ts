@@ -1,6 +1,6 @@
 import { LibSafeAny } from './any';
 
-export interface AppPageOfData<
+export interface LibPageOfData<
   T extends Record<string, LibSafeAny> = Record<string, LibSafeAny>,
 > {
   first?: number;

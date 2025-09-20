@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   LIB_CLASS_MERGER_SOURCES,
+  LibAppearanceDirective,
+  LibClassMergerDirective,
   LibIconPositionDirective,
   LibSeverityDirective,
 } from '@libs/lib-core';
@@ -13,21 +15,26 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [
     {
-      inputs: ['severity'],
+      inputs: ['libSeverity:severity'],
       directive: LibSeverityDirective,
     },
+    {
+      directive: LibAppearanceDirective,
+      inputs: ['libAppearance:appearance'],
+    },
+    LibClassMergerDirective,
     {
       inputs: ['libIconPosition:iconPosition', 'icon', 'iconSet'],
       directive: LibIconPositionDirective,
     },
   ],
   host: {
-    class: `inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors text-white`,
+    class: `rounded-full px-2.5 py-0.5 text-xs font-semibold`,
   },
   providers: [
     {
       provide: LIB_CLASS_MERGER_SOURCES,
-      useValue: ['severityClass', 'class'],
+      useValue: ['severity-class', 'appearance-class', 'class'],
     },
   ],
 })

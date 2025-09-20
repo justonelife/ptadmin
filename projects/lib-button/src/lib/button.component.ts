@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import {
   LIB_CLASS_MERGER_SOURCES,
+  LibClassMergerDirective,
   LibIconPositionDirective,
   LibSeverityDirective,
 } from '@libs/lib-core';
@@ -68,13 +69,14 @@ class OutlinedVariantResolver implements IVariantResolve {
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [
     {
-      inputs: ['severity'],
+      inputs: ['libSeverity:severity'],
       directive: LibSeverityDirective,
     },
     {
       inputs: ['libIconPosition', 'icon', 'iconSet'],
       directive: LibIconPositionDirective,
     },
+    LibClassMergerDirective,
   ],
   styleUrl: './button.component.scss',
   host: {
@@ -91,7 +93,7 @@ class OutlinedVariantResolver implements IVariantResolve {
     },
     {
       provide: LIB_CLASS_MERGER_SOURCES,
-      useValue: ['severityClass', 'buttonClass', 'class'],
+      useValue: ['severity-class', 'buttonClass', 'class'],
     },
   ],
 })
