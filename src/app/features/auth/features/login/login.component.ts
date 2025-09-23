@@ -26,6 +26,11 @@ export class LoginContainerComponent {
   });
 
   alert(): void {
-    this.alertService.success();
+    const random = Math.round(Math.random());
+    if (random === 0) {
+      this.alertService.success();
+    } else {
+      this.alertService.error();
+    }
   }
 }

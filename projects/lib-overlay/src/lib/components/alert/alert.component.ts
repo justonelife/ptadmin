@@ -1,9 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  HostListener,
   input,
+  linkedSignal,
+  OnInit,
+  output,
+  OutputEmitterRef,
   Signal,
 } from '@angular/core';
+import { LibButtonComponent } from '@libs/lib-button';
 import {
   LIB_CLASS_MERGER_SOURCES,
   LibAppearanceDirective,
@@ -11,15 +18,31 @@ import {
   LibIconPositionDirective,
   LibSeverityDirective,
 } from '@libs/lib-core';
+import {
+  BehaviorSubject,
+  EMPTY,
+  filter,
+  interval,
+  race,
+  Subject,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 
 export interface IAlertComponent {
-  title?: string | Signal<string>;
-  message?: string | Signal<string>;
+  title: string | Signal<string>;
+  message: string | Signal<string>;
+  emitClose: OutputEmitterRef<void>;
+
+  close(): void;
 }
 
 @Component({
   selector: 'lib-alert',
+  imports: [LibButtonComponent],
   templateUrl: './alert.component.html',
+  styleUrl: './alert.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [
     {
@@ -43,10 +66,61 @@ export interface IAlertComponent {
     },
   ],
   host: {
-    class: 'p-2 min-w-[300px] max-w-[400px]',
+    class: 'relative block p-2 w-[400px] overflow-hidden',
   },
 })
-export class AlertComponent implements IAlertComponent {
+export class LibAlertComponent implements IAlertComponent, OnInit {
   title = input<string>('');
   message = input<string>('');
+  lifetime = input<number | undefined>(undefined);
+  closable = input<boolean>();
+
+  emitClose = output();
+  manualClose$ = new Subject<void>();
+  paused$ = new BehaviorSubject<boolean>(false);
+  timeLeft = linkedSignal(() => this.lifetime() || 0);
+  lifeTimePercent = computed(() => {
+    if (this.timeLeft() < 0) return 0;
+    if (!this.lifetime()) return 0;
+    return (this.timeLeft() / (this.lifetime() || 1)) * 100;
+  });
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.paused$.next(true);
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.paused$.next(false);
+  }
+
+  ngOnInit(): void {
+    race([
+      this.manualClose$,
+      this.paused$.pipe(
+        switchMap((paused) => {
+          const TICK = 100; //ms
+          return !paused
+            ? interval(TICK).pipe(
+                tap(() => {
+                  this.timeLeft.update((v) => v - TICK);
+                }),
+                filter(() => this.timeLeft() < 0)
+              )
+            : EMPTY;
+        })
+      ),
+    ])
+      .pipe(
+        take(1),
+        tap(() => this.emitClose.emit())
+      )
+      .subscribe();
+  }
+
+  close(): void {
+    this.manualClose$.next();
+    this.manualClose$.complete();
+  }
 }

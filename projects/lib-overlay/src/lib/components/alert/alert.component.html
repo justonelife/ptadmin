@@ -1,6 +1,32 @@
+@let _closable = closable();
+
 <div class="p-1">
   <h1 class="font-semibold">{{ title() }}</h1>
+
   <p class="text-sm">
     {{ message() }}
   </p>
 </div>
+
+@if (_closable === undefined || _closable) {
+  <button
+    lib-button
+    class="text-current absolute top-0 right-0"
+    type="button"
+    appearance="ghost"
+    icon="close"
+    iconSet="outlined"
+    (click)="close()"
+  ></button>
+}
+
+@if (lifetime(); as _lifetime) {
+  <div class="h-[4px] w-full absolute bottom-0 left-0 bg-gray-300">
+    <div class="h-full w-11/12 mx-auto">
+      <div
+        class="h-full w-full bg-current transition-[width] ease-linear transition-100"
+        [style.width.%]="lifeTimePercent()"
+      ></div>
+    </div>
+  </div>
+}

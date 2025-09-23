@@ -1,18 +1,21 @@
-import { ComponentRef, inject, Injectable } from '@angular/core';
-import { ALERT_COMPONENT } from '../di/alert.di';
 import { Overlay, OverlayPositionBuilder } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { IAlertComponent } from '../components/alert/alert.component';
+import { ComponentRef, inject, Injectable } from '@angular/core';
 import { LibSeverity } from '@libs/lib-core';
+import { LibAlertsContainerComponent } from '../components/alerts-container/alerts-container.component';
+import { ALERT_COMPONENT, LIB_OVERLAY_CONFIG } from '../di/alert.di';
+import { Alert } from '../types/alert';
+import { AlertConfig } from '../types/config';
 
 export interface IAlertService {
-  success(message: string, title: string): void;
+  success(alert: Alert): void;
 }
 
 @Injectable({ providedIn: 'root' })
 export class LibAlertService implements IAlertService {
   //TODO: custom ALERT_COMPONENT should have hostDirective like the default one.
   component = inject(ALERT_COMPONENT);
+  config = inject(LIB_OVERLAY_CONFIG);
   overlay = inject(Overlay);
   positionBuilder = inject(OverlayPositionBuilder);
 
@@ -20,42 +23,62 @@ export class LibAlertService implements IAlertService {
     positionStrategy: this.positionBuilder.global().top('10px').right('10px'),
   });
 
+  containerPortal: ComponentPortal<LibAlertsContainerComponent> | null = null;
+  containerRef!: ComponentRef<LibAlertsContainerComponent>;
+
   //TODO: add string | TemplateRef
-  success(message = 'Successfully!', title = 'Success'): void {
-    const alertRef = this.buildAlertRef('success');
-
-    alertRef.setInput('title', title);
-    alertRef.setInput('message', message);
-  }
-
-  private buildAlertRef(severity: LibSeverity): ComponentRef<IAlertComponent> {
-    return this.configBySeverity(this.buildBaseAlertRef(), severity);
-  }
-
-  private buildBaseAlertRef(): ComponentRef<IAlertComponent> {
-    const alertPortal = new ComponentPortal(this.component);
-    const alertRef = this.overlayRef.attach(alertPortal);
-    alertRef.setInput('appearance', 'soft');
-    alertRef.setInput('iconSet', 'outlined');
-    return alertRef;
-  }
-
-  private configBySeverity(
-    alertRef: ComponentRef<IAlertComponent>,
-    severity: LibSeverity
-  ): ComponentRef<IAlertComponent> {
-    alertRef.setInput('severity', severity);
-    switch (severity) {
-      case 'success':
-        alertRef.setInput('icon', 'check_circle');
-        break;
-
-      case 'danger':
-        alertRef.setInput('icon', 'cancel');
-        break;
-      default:
-        alertRef.setInput('icon', 'info');
+  success(
+    alert: Alert = {
+      message: 'Successfully',
+      title: 'Success',
     }
-    return alertRef;
+  ): void {
+    const containerRef = this.buildContainerRef();
+    containerRef.instance.pushAlert(
+      this.computeAlertWithGlobalConfig(alert, this.config, 'success'),
+      'success'
+    );
+  }
+
+  error(
+    alert: Alert = {
+      message: 'Error',
+      title: 'Error',
+    }
+  ): void {
+    const containerRef = this.buildContainerRef();
+    containerRef.instance.pushAlert(
+      this.computeAlertWithGlobalConfig(alert, this.config, 'error'),
+      'error'
+    );
+  }
+
+  private buildContainerRef(): ComponentRef<LibAlertsContainerComponent> {
+    return this.buildBaseAlertRef();
+    // return this.configBySeverity(this.buildBaseAlertRef(), severity);
+  }
+
+  private buildBaseAlertRef(): ComponentRef<LibAlertsContainerComponent> {
+    if (!this.containerPortal) {
+      this.containerPortal = new ComponentPortal(LibAlertsContainerComponent);
+      this.containerRef = this.overlayRef.attach(this.containerPortal);
+    }
+    return this.containerRef;
+  }
+
+  private computeAlertWithGlobalConfig(
+    alert: Alert,
+    config: AlertConfig,
+    severity: LibSeverity
+  ): Alert {
+    const severityConfig = config[severity];
+    const icon = alert.icon || severityConfig?.icon || config.icon;
+    const lifetime =
+      alert.lifetime || severityConfig?.lifetime || config.lifetime;
+    const title = alert.title || severityConfig?.title || '';
+    const message = alert.message || severityConfig?.message;
+    const closable = alert.closable || severityConfig?.closable;
+
+    return { icon, lifetime, title, message, closable };
   }
 }

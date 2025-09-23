@@ -12,7 +12,7 @@ export class LibSeverityDirective {
     neutral:
       'bg-gray-500 border-gray-500 text-gray-600 hover:bg-gray-600 focus-visible:ring-gray-500/50 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700',
     info: 'bg-cyan-600 border-cyan-600 text-cyan-600 hover:bg-cyan-700 focus-visible:ring-cyan-500/50',
-    danger:
+    error:
       'bg-red-600 border-red-600 text-red-600 hover:bg-red-700 focus-visible:ring-red-500/50',
     primary:
       'bg-blue-500 border-blue-500 text-blue-500 hover:bg-blue-600 focus-visible:ring-blue-500/50',

@@ -1,7 +1,7 @@
 export type LibSeverity =
   | 'neutral'
   | 'info'
-  | 'danger'
+  | 'error'
   | 'primary'
   | 'secondary'
   | 'warning'
