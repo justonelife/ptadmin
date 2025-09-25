@@ -36,7 +36,8 @@ export class LibAlertService implements IAlertService {
     const containerRef = this.buildContainerRef();
     containerRef.instance.pushAlert(
       this.computeAlertWithGlobalConfig(alert, this.config, 'success'),
-      'success'
+      'success',
+      this.config.appearance
     );
   }
 
@@ -49,7 +50,8 @@ export class LibAlertService implements IAlertService {
     const containerRef = this.buildContainerRef();
     containerRef.instance.pushAlert(
       this.computeAlertWithGlobalConfig(alert, this.config, 'error'),
-      'error'
+      'error',
+      this.config.appearance
     );
   }
 

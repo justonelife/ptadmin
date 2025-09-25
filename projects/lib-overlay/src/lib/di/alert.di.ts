@@ -27,32 +27,35 @@ export function provideAlertComponent(component: IAlertComponent) {
   ]);
 }
 
+const DEFAULT_CONFIG: AlertConfig = {
+  lifetime: 2_000,
+  icon: 'info',
+  appearance: 'soft',
+  error: {
+    lifetime: null,
+    icon: 'cancel',
+  },
+  success: {
+    icon: 'check_circle',
+  },
+  warning: {
+    icon: 'warning',
+  },
+};
+
 export const LIB_OVERLAY_CONFIG = new InjectionToken<AlertConfig>(
   'LIB_OVERLAY_GLOBAL_CONFIG',
   {
     providedIn: 'root',
-    factory: () => ({
-      lifetime: 2_000,
-      icon: 'info',
-      error: {
-        lifetime: null,
-        icon: 'cancel',
-      },
-      success: {
-        icon: 'check_circle',
-      },
-      warning: {
-        icon: 'warning',
-      },
-    }),
+    factory: () => DEFAULT_CONFIG,
   }
 );
 
-export function provideLibOverlayConfig(config: AlertConfig) {
+export function provideLibAlertServiceConfig(config: AlertConfig) {
   return makeEnvironmentProviders([
     {
       provide: LIB_OVERLAY_CONFIG,
-      useValue: config,
+      useValue: { ...DEFAULT_CONFIG, ...config },
     },
   ]);
 }

@@ -6,7 +6,7 @@ import {
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { LibSeverity } from '@libs/lib-core';
+import { LibAppearance, LibSeverity } from '@libs/lib-core';
 import { v4 as uuidv4 } from 'uuid';
 import { ALERT_COMPONENT } from '../../di/alert.di';
 import { Alert } from '../../types/alert';
@@ -18,7 +18,9 @@ type UUIDAlert = Alert & {
 
 @Component({
   selector: 'lib-alerts-container',
-  templateUrl: './alerts-container.component.html',
+  template: `
+    <ng-container #container></ng-container>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'space-y-2',
@@ -31,7 +33,11 @@ export class LibAlertsContainerComponent<
   alerts: UUIDAlert[] = [];
   container = viewChild('container', { read: ViewContainerRef });
 
-  pushAlert(alert: Alert, severity: LibSeverity): void {
+  pushAlert(
+    alert: Alert,
+    severity: LibSeverity,
+    appearance: LibAppearance = 'soft'
+  ): void {
     const cloneAlert: UUIDAlert = {
       ...alert,
       uuid: uuidv4(),
@@ -44,7 +50,7 @@ export class LibAlertsContainerComponent<
       'message',
       alert.message + ' ' + cloneAlert.uuid + ' ' + alert.lifetime
     );
-    alertRef?.setInput('appearance', 'soft');
+    alertRef?.setInput('appearance', appearance || 'soft');
     alertRef?.setInput('closable', cloneAlert.closable);
     alertRef?.setInput('severity', severity);
     alertRef?.setInput('icon', cloneAlert.icon);

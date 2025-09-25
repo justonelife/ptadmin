@@ -1,5 +1,5 @@
 export * from './lib/services/alert.service';
 export {
   provideAlertComponent,
-  provideLibOverlayConfig,
+  provideLibAlertServiceConfig as provideLibOverlayConfig,
 } from './lib/di/alert.di';
