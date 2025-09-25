@@ -22,6 +22,7 @@ import {
   BehaviorSubject,
   EMPTY,
   filter,
+  iif,
   interval,
   race,
   Subject,
@@ -42,7 +43,6 @@ export interface IAlertComponent {
   selector: 'lib-alert',
   imports: [LibButtonComponent],
   templateUrl: './alert.component.html',
-  styleUrl: './alert.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [
     {
@@ -102,11 +102,15 @@ export class LibAlertComponent implements IAlertComponent, OnInit {
         switchMap((paused) => {
           const TICK = 100; //ms
           return !paused
-            ? interval(TICK).pipe(
-                tap(() => {
-                  this.timeLeft.update((v) => v - TICK);
-                }),
-                filter(() => this.timeLeft() < 0)
+            ? iif(
+                () => !!this.lifetime(),
+                interval(TICK).pipe(
+                  tap(() => {
+                    this.timeLeft.update((v) => v - TICK);
+                  }),
+                  filter(() => this.timeLeft() < 0)
+                ),
+                EMPTY
               )
             : EMPTY;
         })

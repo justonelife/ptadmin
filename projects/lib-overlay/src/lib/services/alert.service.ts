@@ -55,7 +55,6 @@ export class LibAlertService implements IAlertService {
 
   private buildContainerRef(): ComponentRef<LibAlertsContainerComponent> {
     return this.buildBaseAlertRef();
-    // return this.configBySeverity(this.buildBaseAlertRef(), severity);
   }
 
   private buildBaseAlertRef(): ComponentRef<LibAlertsContainerComponent> {

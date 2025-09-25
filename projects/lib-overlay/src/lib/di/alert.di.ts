@@ -32,7 +32,7 @@ export const LIB_OVERLAY_CONFIG = new InjectionToken<AlertConfig>(
   {
     providedIn: 'root',
     factory: () => ({
-      lifetime: 5_000,
+      lifetime: 2_000,
       icon: 'info',
       error: {
         lifetime: null,
@@ -47,3 +47,12 @@ export const LIB_OVERLAY_CONFIG = new InjectionToken<AlertConfig>(
     }),
   }
 );
+
+export function provideLibOverlayConfig(config: AlertConfig) {
+  return makeEnvironmentProviders([
+    {
+      provide: LIB_OVERLAY_CONFIG,
+      useValue: config,
+    },
+  ]);
+}

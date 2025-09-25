@@ -28,7 +28,10 @@ export class LoginContainerComponent {
   alert(): void {
     const random = Math.round(Math.random());
     if (random === 0) {
-      this.alertService.success();
+      this.alertService.success({
+        title: 'Fetched',
+        lifetime: 5_000,
+      });
     } else {
       this.alertService.error();
     }
