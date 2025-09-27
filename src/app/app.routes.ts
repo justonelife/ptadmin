@@ -17,6 +17,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('@features/system-settings').then((r) => r.routes),
       },
+      {
+        path: 'playground',
+        loadChildren: () =>
+          import('@features/playground').then((r) => r.routes),
+      },
     ],
   },
   {

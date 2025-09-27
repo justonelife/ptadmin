@@ -9,6 +9,9 @@ import { AlertConfig } from '../types/config';
 
 export interface IAlertService {
   success(alert: Alert): void;
+  error(alert: Alert): void;
+  warning(alert: Alert): void;
+  info(alert: Alert): void;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -29,28 +32,33 @@ export class LibAlertService implements IAlertService {
   //TODO: add string | TemplateRef
   success(
     alert: Alert = {
-      message: 'Successfully',
       title: 'Success',
     }
   ): void {
-    const containerRef = this.buildContainerRef();
-    containerRef.instance.pushAlert(
-      this.computeAlertWithGlobalConfig(alert, this.config, 'success'),
-      'success',
-      this.config.appearance
-    );
+    this.alert(alert, 'success');
   }
 
   error(
     alert: Alert = {
-      message: 'Error',
       title: 'Error',
     }
   ): void {
+    this.alert(alert, 'error');
+  }
+
+  warning(alert: Alert = { title: 'Warning' }): void {
+    this.alert(alert, 'warning');
+  }
+
+  info(alert: Alert = { title: 'Info' }): void {
+    this.alert(alert, 'info');
+  }
+
+  private alert(alert: Alert, severity: LibSeverity): void {
     const containerRef = this.buildContainerRef();
     containerRef.instance.pushAlert(
-      this.computeAlertWithGlobalConfig(alert, this.config, 'error'),
-      'error',
+      this.computeAlertWithGlobalConfig(alert, this.config, severity),
+      severity,
       this.config.appearance
     );
   }
@@ -74,8 +82,14 @@ export class LibAlertService implements IAlertService {
   ): Alert {
     const severityConfig = config[severity];
     const icon = alert.icon || severityConfig?.icon || config.icon;
+
     const lifetime =
-      alert.lifetime || severityConfig?.lifetime || config.lifetime;
+      alert.lifetime !== undefined
+        ? alert.lifetime
+        : severityConfig?.lifetime !== undefined
+          ? severityConfig.lifetime
+          : config.lifetime;
+
     const title = alert.title || severityConfig?.title || '';
     const message = alert.message || severityConfig?.message;
     const closable = alert.closable || severityConfig?.closable;

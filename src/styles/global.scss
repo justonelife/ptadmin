@@ -4,6 +4,7 @@
 @use "./material/custom" as materialCustom;
 @use "./components/tabs";
 @use "./components/card";
+@use "./components/tree";
 
 $export-config: (
   "radius": variables.$radius,

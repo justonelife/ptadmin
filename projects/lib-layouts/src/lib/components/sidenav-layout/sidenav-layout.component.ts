@@ -30,12 +30,14 @@ import { LibButtonComponent } from '@libs/lib-button';
 import { LibIconPositionDirective } from '@libs/lib-core';
 import { filter, map, shareReplay, tap } from 'rxjs';
 import { LibBreakpointService } from '../../services';
+import { MatTreeModule } from '@angular/material/tree';
 
 export interface NavItem {
   title: string;
-  path: string;
+  path?: string;
   icon?: string;
   iconSet?: string;
+  children?: Omit<NavItem, 'children'>[];
 }
 
 export type SideMode = MatDrawerMode;
@@ -47,6 +49,7 @@ export type SideMode = MatDrawerMode;
     RouterModule,
     LibIconPositionDirective,
     LibButtonComponent,
+    MatTreeModule,
   ],
   selector: 'lib-sidenav-layout',
   templateUrl: './sidenav-layout.component.html',
@@ -54,13 +57,13 @@ export type SideMode = MatDrawerMode;
   exportAs: 'SidenavLayout',
   styleUrl: './sidenav-layout.component.scss',
 })
-export class LibSidenavLayoutComponent {
+export class LibSidenavLayoutComponent<T extends NavItem = NavItem> {
   readonly activatedRoute = inject(ActivatedRoute, { skipSelf: true });
   readonly router = inject(Router);
   readonly bp = inject(LibBreakpointService);
   sideNavComponent = viewChild<MatSidenav>('sidenav');
 
-  navConfig = input<NavItem[]>();
+  navConfig = input<T[]>();
 
   mainTemplate = contentChild<TemplateRef<unknown>>('main');
   logoTemplate = contentChild<TemplateRef<unknown>>('logo');
@@ -128,5 +131,13 @@ export class LibSidenavLayoutComponent {
   toggleDesktopSidebarState() {
     this.sidebarCollapsed.update((value) => !value);
     this.sidebarCollapsedChange.emit(this.sidebarCollapsed());
+  }
+
+  childrenAccessor(node: T): T[] {
+    return (node.children as T[]) ?? [];
+  }
+
+  hasChild(_: number, node: T) {
+    return !!node.children && node.children.length > 0;
   }
 }

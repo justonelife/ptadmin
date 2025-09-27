@@ -13,4 +13,11 @@ export const routes: Routes = [
         (c) => c.PlaygroundFormComponent
       ),
   },
+  {
+    path: 'mail-template-editor',
+    loadComponent: () =>
+      import(
+        './features/mail-template-editor/mail-template-editor.component'
+      ).then((c) => c.MailTemplateEditorComponent),
+  },
 ];

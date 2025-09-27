@@ -10,4 +10,18 @@ export const MENU: NavItem[] = [
     icon: 'settings',
     iconSet: 'outlined',
   },
+  {
+    title: 'Playground',
+    path: 'playground',
+    icon: 'playground',
+    iconSet: 'outlined',
+    children: [
+      {
+        title: 'Mail Template Editor',
+        path: 'playground/mail-template-editor',
+        icon: 'stacked_email',
+        iconSet: 'outlined',
+      },
+    ],
+  },
 ];

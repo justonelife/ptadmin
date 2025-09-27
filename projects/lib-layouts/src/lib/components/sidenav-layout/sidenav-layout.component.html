@@ -60,27 +60,68 @@
 <ng-template #sidebar>
   <div class="p-6">
     <ng-container *ngTemplateOutlet="_logo"></ng-container>
-    <menu class="mt-4 flex flex-col gap-2">
-      @for (item of navConfig(); track item.path) {
-        <li
-          [routerLink]="item.path"
-          class="cursor-pointer flex items-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-blue-50 hover:dark:bg-slate-800/50 transition-colors text-primary font-medium dark:text-slate-400 dark:hover:text-white"
-          libIconPosition="center left"
-          [icon]="item.icon || ''"
-          [iconSet]="item.iconSet || ''"
-          routerLinkActive="bg-blue-100 text-blue-700 dark:bg-slate-800/50 dark:text-white"
+
+    @if (navConfig(); as _navConfig) {
+      <mat-tree
+        #tree
+        [dataSource]="_navConfig"
+        [childrenAccessor]="childrenAccessor"
+      >
+        <mat-tree-node
+          *matTreeNodeDef="let node"
+          matTreeNodePadding
+          [matTreeNodePaddingIndent]="20"
         >
-          <a class="overflow-hidden text-ellipsis line-clamp-1">
-            {{ item.title }}
-          </a>
-        </li>
-      } @empty {
-        <ng-content select="sidebar">
-          Please provide item through navConfig or custom through ng-template
-          sidebar
-        </ng-content>
-      }
-    </menu>
+          <span
+            [routerLink]="node.path"
+            class="w-full cursor-pointer flex nodes-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-blue-50 hover:dark:bg-slate-800/50 transition-colors text-primary font-medium dark:text-slate-400 dark:hover:text-white"
+            libIconPosition="center left"
+            [icon]="node.icon || ''"
+            [iconSet]="node.iconSet || ''"
+            routerLinkActive="bg-blue-100 text-blue-700 dark:bg-slate-800/50 dark:text-white"
+          >
+            <a class="overflow-hidden text-ellipsis line-clamp-1">
+              {{ node.title }}
+            </a>
+          </span>
+        </mat-tree-node>
+
+        <mat-tree-node
+          *matTreeNodeDef="let node; when: hasChild"
+          matTreeNodePadding
+          matTreeNodeToggle
+          [cdkTreeNodeTypeaheadLabel]="node.name"
+        >
+          <button
+            [routerLink]="node.path"
+            lib-button
+            matTreeNodeToggle
+            [attr.aria-label]="'Toggle ' + node.name"
+            severity="neutral"
+            position="center right"
+            [icon]="tree.isExpanded(node) ? 'expand_more' : 'chevron_right'"
+            appearance="ghost"
+            class="w-full cursor-pointer flex nodes-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-blue-50 hover:dark:bg-slate-800/50 transition-colors text-primary font-medium dark:text-slate-400 dark:hover:text-white"
+            routerLinkActive="bg-blue-100 text-blue-700 dark:bg-slate-800/50 dark:text-white"
+            [routerLinkActiveOptions]="{ exact: false }"
+          >
+            <span
+              libIconPosition="center left"
+              [icon]="node.icon || ''"
+              [iconSet]="node.iconSet || ''"
+              class="w-full overflow-hidden text-ellipsis line-clamp-1"
+            >
+              {{ node.title }}
+            </span>
+          </button>
+        </mat-tree-node>
+      </mat-tree>
+    } @else {
+      <ng-content select="sidebar">
+        Please provide item through navConfig or custom through ng-template
+        sidebar
+      </ng-content>
+    }
   </div>
 </ng-template>
 

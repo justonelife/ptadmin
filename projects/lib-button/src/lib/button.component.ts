@@ -21,7 +21,7 @@ import {
       directive: LibSeverityDirective,
     },
     {
-      inputs: ['libIconPosition', 'icon', 'iconSet'],
+      inputs: ['libIconPosition:position', 'icon', 'iconSet'],
       directive: LibIconPositionDirective,
     },
     {

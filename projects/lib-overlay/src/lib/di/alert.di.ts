@@ -32,7 +32,6 @@ const DEFAULT_CONFIG: AlertConfig = {
   icon: 'info',
   appearance: 'soft',
   error: {
-    lifetime: null,
     icon: 'cancel',
   },
   success: {
