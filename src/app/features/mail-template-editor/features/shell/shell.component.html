@@ -1,17 +1,21 @@
 <div class="grid grid-cols-2 gap-2">
   <div>
-    <lib-tabs [tabs]="TABS">
+    <lib-tabs [tabs]="TABS" perserveContent>
       <ng-template libTemplate="template-editor">
         <app-mail-template-editor
-          [template]="template()"
+          [template]="template"
+          [variables]="config.variables | key"
         ></app-mail-template-editor>
       </ng-template>
       <ng-template libTemplate="variables">
-        <app-mail-template-variables-config></app-mail-template-variables-config>
+        <app-mail-template-variables-config
+          [(ngModel)]="config"
+        ></app-mail-template-variables-config>
       </ng-template>
     </lib-tabs>
+    <pre>{{ config | json }}</pre>
   </div>
   <div>
-    <app-mail-template-preview></app-mail-template-preview>
+    <app-mail-template-preview [data]="result"></app-mail-template-preview>
   </div>
 </div>

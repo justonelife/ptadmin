@@ -4,6 +4,7 @@ import {
   NgTemplateOutlet,
 } from '@angular/common';
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -41,6 +42,7 @@ interface Render {
 })
 export class LibTabsComponent {
   tabs = input.required<LibTabItem[]>();
+  perserveContent = input(false, { transform: booleanAttribute });
   templates = contentChildren(LibTemplateDirective);
 
   mapper = computed<Record<string, Render>>(() => {

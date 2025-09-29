@@ -1,6 +1,6 @@
 @let _mapper = mapper();
 
-<mat-tab-group>
+<mat-tab-group [preserveContent]="perserveContent()">
   @for (tab of tabs(); track tab.value) {
     <mat-tab>
       <ng-template mat-tab-label>

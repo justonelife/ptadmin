@@ -12,7 +12,20 @@
 
   <div class="h-10 flex gap-1 flex-wrap items-center">
     @for (language of languages; track $index) {
-      <lib-chip>{{ language }}</lib-chip>
+      <lib-chip>
+        <span class="flex gap-1 items-center">
+          {{ language }}
+          <button
+            lib-button
+            icon="close"
+            class="p-0 h-3"
+            iconSet="outlined-sm"
+            severity="neutral"
+            appearance="ghost"
+            (click)="removeLanguage(language)"
+          ></button>
+        </span>
+      </lib-chip>
     }
   </div>
 
@@ -37,7 +50,7 @@
 </h3>
 <div class="flex gap-1 items-center">
   <lib-text-input
-    [(ngModel)]="selectedVariable"
+    [(ngModel)]="newVariable"
     class="grow"
     placeholder="Variable name (e.g., firstName)"
   ></lib-text-input>
@@ -63,12 +76,15 @@
         </span>
       </ng-template>
 
-      @for (language of languages; track $index) {
-        <lib-text-input
-          [label]="language"
-          [placeholder]="variable + ' in ' + language"
-        ></lib-text-input>
-      }
+      <form [formGroup]="getVariableForm(variable)">
+        @for (language of languages; track $index) {
+          <lib-text-input
+            [label]="language"
+            [placeholder]="variable + ' in ' + language"
+            [formControlName]="language"
+          ></lib-text-input>
+        }
+      </form>
     </lib-card>
   }
 </div>

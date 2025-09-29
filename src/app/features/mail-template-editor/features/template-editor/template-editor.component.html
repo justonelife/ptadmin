@@ -10,11 +10,23 @@
     </span>
   </ng-template>
 
-  variables
+  <div class="h-10 flex gap-1 flex-wrap items-center">
+    @for (variable of variables(); track $index) {
+      <button
+        lib-button
+        icon="add"
+        class="p-1 h-6"
+        iconSet="outlined-sm"
+        severity="neutral"
+      >
+        {{ variable }}
+      </button>
+    }
+  </div>
 </lib-card>
 
 <lib-text-input
   type="textarea"
   [rows]="20"
-  [ngModel]="template()"
+  [(ngModel)]="template"
 ></lib-text-input>

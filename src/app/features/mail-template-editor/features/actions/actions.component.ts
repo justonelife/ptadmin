@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MailTemplateEditorService } from '@features/mail-template-editor/data-access';
 import { LibButtonComponent } from '@libs/lib-button';
 import { LibChipComponent } from '@libs/lib-chip';
 
@@ -9,7 +10,12 @@ import { LibChipComponent } from '@libs/lib-chip';
     <lib-chip icon="language" iconSet="outlined" severity="neutral">
       3 languages
     </lib-chip>
-    <button lib-button icon="wand_stars" iconSet="outlined">
+    <button
+      lib-button
+      icon="wand_stars"
+      iconSet="outlined"
+      (click)="generate()"
+    >
       Generate for All Languages
     </button>
   `,
@@ -18,4 +24,10 @@ import { LibChipComponent } from '@libs/lib-chip';
     class: 'flex gap-4 items-center',
   },
 })
-export class ActionsComponent {}
+export class ActionsComponent {
+  service = inject(MailTemplateEditorService);
+
+  generate() {
+    this.service.generate();
+  }
+}
