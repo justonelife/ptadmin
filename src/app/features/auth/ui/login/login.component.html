@@ -1,14 +1,18 @@
-<lib-card appearance="raised" class="w-[450px]">
-  <ng-template #title>
-    <h1 class="text-center">Login to Dashboard</h1>
-  </ng-template>
-  <ng-template #subTitle>
-    <p class="text-center">Enter your credentials to access the admin panel</p>
-  </ng-template>
-  <form [formGroup]="form()" (ngSubmit)="onSubmit()">
-    <lib-dynamic-form [fields]="FIELDS"></lib-dynamic-form>
-    <div class="flex gap-4 w-full mt-6">
-      <button lib-button type="submit" class="w-full">Login</button>
-    </div>
-  </form>
-</lib-card>
+<div class="flex items-center justify-center w-dvw h-dvh bg-primary">
+  <lib-card appearance="raised" class="w-[450px]">
+    <ng-template #title>
+      <h1 class="text-center">Login to Dashboard</h1>
+    </ng-template>
+    <ng-template #subTitle>
+      <p class="text-center">
+        Enter your credentials to access the admin panel
+      </p>
+    </ng-template>
+    <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="mt-6">
+      <lib-dynamic-form [fields]="FIELDS"></lib-dynamic-form>
+      <div class="flex gap-4 w-full mt-6">
+        <button lib-button type="submit" class="w-full">Login</button>
+      </div>
+    </form>
+  </lib-card>
+</div>

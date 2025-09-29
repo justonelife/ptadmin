@@ -13,31 +13,24 @@
   font-variation-settings: "OPSZ" 30;
 }
 
-.mat-mdc-card-content {
-  padding: 24px !important;
-}
-
-.mat-mdc-card-content:last-child {
-  //NOTE: consider remove?
-  padding-bottom: 24px !important;
-}
-
 .lib-controller {
   mat-form-field {
-    --lib-controller-height: 40px;
+    --lib-controller-height: 36px;
     display: inline-flex;
     align-items: center;
-    height: var(--lib-controller-height);
+    min-height: var(--lib-controller-height);
     width: 100%;
     color: var(--color-gray-900);
-    background-color: transparent;
+    background-color: light-dark(var(--color-white), var(--color-black));
     border: 1px var(--tw-border-style);
-    border-color: light-dark(var(--app-color-light-gray),
-        var(--app-color-dark-gray));
+    border-color: light-dark(
+      var(--app-color-light-gray),
+      var(--app-color-dark-gray)
+    );
     border-radius: var(--radius-md);
   }
 
-  mat-form-field>.mat-mdc-text-field-wrapper {
+  mat-form-field > .mat-mdc-text-field-wrapper {
     align-items: center;
   }
 

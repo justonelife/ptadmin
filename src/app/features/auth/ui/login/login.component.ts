@@ -26,7 +26,7 @@ import { LibTypedForm } from '@libs/lib-core';
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'flex items-center justify-center w-dvw h-dvh',
+    class: 'w-full h-full block dark:bg-slate-950',
   },
 })
 export class LoginComponent<T extends Login = Login> {

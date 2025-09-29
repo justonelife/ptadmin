@@ -16,3 +16,4 @@ export {
 export { provideCustomValidators } from './lib/services/validations-resolver.service';
 export * from './lib/directives/base-controller.directive';
 export * from './lib/directives/dynamic-controller-template.directive';
+export * from './lib/components/label/label.component';

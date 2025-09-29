@@ -1,0 +1,82 @@
+<div class="px-2 flex justify-between items-center h-[40px]">
+  <div class="flex gap-8">
+    <span
+      libIconPosition="center left"
+      icon="visibility"
+      iconSet="outlined"
+      class="font-semibold"
+    >
+      Preview
+    </span>
+    <span>4 templates generated</span>
+  </div>
+
+  <div class="flex gap-2">
+    <button
+      type="button"
+      lib-button
+      icon="content_copy"
+      iconSet="outlined"
+      appearance="ghost"
+      severity="neutral"
+    >
+      Copy
+    </button>
+
+    <button
+      type="button"
+      lib-button
+      icon="download"
+      iconSet="outlined"
+      appearance="ghost"
+      severity="neutral"
+    >
+      Download
+    </button>
+
+    <button
+      type="button"
+      lib-button
+      icon="download"
+      iconSet="outlined"
+      appearance="ghost"
+      severity="neutral"
+    >
+      All Languages
+    </button>
+  </div>
+</div>
+
+<div class="flex">
+  <lib-select
+    label="Language"
+    [options]="OPTIONS"
+    [(ngModel)]="selectedLanguage"
+  ></lib-select>
+</div>
+
+<div class="flex">
+  <div class="flex flex-col gap-1">
+    <lib-label label="Viewport"></lib-label>
+
+    <div class="flex gap-2">
+      <button
+        type="button"
+        lib-button
+        icon="desktop_windows"
+        iconSet="outlined"
+      >
+        Desktop
+      </button>
+      <button
+        type="button"
+        lib-button
+        icon="mobile"
+        iconSet="outlined"
+        severity="neutral"
+      >
+        Mobile
+      </button>
+    </div>
+  </div>
+</div>

@@ -5,11 +5,14 @@ import { Component, input } from '@angular/core';
   selector: 'lib-label',
   template: `
     @if (label(); as _label) {
-      <span class="lib-controller__label text-md fg-primary block">
+      <span class="lib-controller__label text-sm fg-primary block">
         {{ _label }}
       </span>
     }
   `,
+  host: {
+    class: 'block mb-2',
+  },
 })
 export class LibLabelComponent {
   label = input.required<string>();

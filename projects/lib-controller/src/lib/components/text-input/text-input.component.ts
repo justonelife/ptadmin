@@ -27,4 +27,5 @@ export class LibTextInputComponent extends LibBaseController<string> {
   override label = input<string>('');
 
   type = input<'input' | 'textarea'>('input');
+  rows = input<number>(5);
 }

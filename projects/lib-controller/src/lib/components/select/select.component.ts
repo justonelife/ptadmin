@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { LibSafeAny, provideControlValueAccessor } from '@libs/lib-core';
+import { LibLabelComponent } from '@libs/lib-controller';
 
 export interface Option<T = LibSafeAny> {
   label: string;
@@ -16,7 +17,12 @@ export interface Option<T = LibSafeAny> {
 }
 
 @Component({
-  imports: [MatFormFieldModule, MatSelectModule, FormsModule],
+  imports: [
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    LibLabelComponent,
+  ],
   selector: 'lib-select',
   templateUrl: './select.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

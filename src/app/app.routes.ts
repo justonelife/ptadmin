@@ -19,8 +19,13 @@ export const routes: Routes = [
       },
       {
         path: 'playground',
-        loadChildren: () =>
-          import('@features/playground').then((r) => r.routes),
+        children: [
+          {
+            path: 'mail-template-editor',
+            loadChildren: () =>
+              import('@features/mail-template-editor').then((r) => r.routes),
+          },
+        ],
       },
     ],
   },

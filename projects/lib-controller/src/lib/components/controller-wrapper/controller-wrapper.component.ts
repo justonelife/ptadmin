@@ -14,7 +14,8 @@ import { LibLabelComponent } from '../label/label.component';
       h-[40px]
       py-0
       px-2
-      bg-transparent
+      bg-white
+      dark:bg-black
       border
       border-gray-300
       dark:border-stone-800

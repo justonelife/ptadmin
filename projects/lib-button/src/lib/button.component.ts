@@ -32,7 +32,7 @@ import {
   ],
   host: {
     class:
-      'cursor-pointer inline-flex items-center justify-center p-1 px-4 font-semibold h-[32px] text-md rounded-md',
+      'cursor-pointer inline-flex items-center justify-center p-1 px-4 font-semibold h-[32px] text-xs rounded-md',
   },
   providers: [
     {

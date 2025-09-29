@@ -13,11 +13,12 @@ import {
   Type,
 } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
-import { LibTemplateDirective } from '@libs/lib-core';
+import { LibIconPositionDirective, LibTemplateDirective } from '@libs/lib-core';
 
 export interface LibTabItem<T = string> {
   label: string;
   value: T;
+  icon?: string;
   component?: Promise<Type<unknown>>;
 }
 
@@ -30,7 +31,13 @@ interface Render {
   selector: 'lib-tabs',
   templateUrl: './tabs.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatTabsModule, NgTemplateOutlet, NgComponentOutlet, AsyncPipe],
+  imports: [
+    MatTabsModule,
+    NgTemplateOutlet,
+    NgComponentOutlet,
+    AsyncPipe,
+    LibIconPositionDirective,
+  ],
 })
 export class LibTabsComponent {
   tabs = input.required<LibTabItem[]>();

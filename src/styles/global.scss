@@ -5,6 +5,7 @@
 @use "./components/tabs";
 @use "./components/card";
 @use "./components/tree";
+@use "./components/select";
 
 $export-config: (
   "radius": variables.$radius,

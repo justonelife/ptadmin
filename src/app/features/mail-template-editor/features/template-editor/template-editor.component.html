@@ -1,0 +1,20 @@
+<lib-card class="block">
+  <ng-template #title>
+    <span class="font-medium text-base inline-flex gap-1 items-center">
+      <span
+        libIconPosition="center left"
+        icon="data_object"
+        iconSet="outlined"
+      ></span>
+      <span class="fg-primary">Variables</span>
+    </span>
+  </ng-template>
+
+  variables
+</lib-card>
+
+<lib-text-input
+  type="textarea"
+  [rows]="20"
+  [(ngModel)]="fakeInput"
+></lib-text-input>

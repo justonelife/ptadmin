@@ -2,7 +2,17 @@
 
 <mat-tab-group>
   @for (tab of tabs(); track tab.value) {
-    <mat-tab [label]="tab.label">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span
+          libIconPosition="center left"
+          [icon]="tab.icon || ''"
+          iconSet="outlined"
+        >
+          {{ tab.label }}
+        </span>
+      </ng-template>
+
       <ng-template matTabContent>
         @if (_mapper[tab.value].component) {
           <ng-container
