@@ -10,5 +10,65 @@
     </span>
   </ng-template>
 
-  variables
+  <div class="h-10 flex gap-1 flex-wrap items-center">
+    @for (language of languages; track $index) {
+      <lib-chip>{{ language }}</lib-chip>
+    }
+  </div>
+
+  <div class="flex gap-1 items-center">
+    <lib-select
+      [options]="LANGUAGES"
+      [(ngModel)]="selectedLanguage"
+      class="grow"
+      placeholder="Add language..."
+    ></lib-select>
+    <button
+      lib-button
+      icon="add"
+      (click)="addLanguage()"
+      type="button"
+    ></button>
+  </div>
 </lib-card>
+
+<h3 libIconPosition="center left" icon="language" class="font-semibold">
+  Variables
+</h3>
+<div class="flex gap-1 items-center">
+  <lib-text-input
+    [(ngModel)]="selectedVariable"
+    class="grow"
+    placeholder="Variable name (e.g., firstName)"
+  ></lib-text-input>
+  <button lib-button icon="add" (click)="addVariable()"></button>
+</div>
+
+<div class="flex gap-2 flex-col">
+  @for (variable of variables; track $index) {
+    <lib-card>
+      <ng-template #title>
+        <span
+          class="font-medium text-base inline-flex gap-1 items-center justify-between w-full"
+        >
+          <span class="fg-primary">
+            &#123; &#123; {{ variable }} &#125; &#125;
+          </span>
+          <button
+            lib-button
+            icon="delete"
+            severity="neutral"
+            appearance="ghost"
+          ></button>
+        </span>
+      </ng-template>
+
+      @for (language of languages; track $index) {
+        <lib-text-input
+          [label]="language"
+          [placeholder]="variable + ' in ' + language"
+        ></lib-text-input>
+      }
+    </lib-card>
+  }
+</div>

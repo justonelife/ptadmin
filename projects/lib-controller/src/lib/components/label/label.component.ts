@@ -11,7 +11,8 @@ import { Component, input } from '@angular/core';
     }
   `,
   host: {
-    class: 'block mb-2',
+    class: 'block',
+    '[class.mb-2]': 'label()',
   },
 })
 export class LibLabelComponent {

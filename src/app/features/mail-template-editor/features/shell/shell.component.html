@@ -2,7 +2,9 @@
   <div>
     <lib-tabs [tabs]="TABS">
       <ng-template libTemplate="template-editor">
-        <app-mail-template-editor></app-mail-template-editor>
+        <app-mail-template-editor
+          [template]="template()"
+        ></app-mail-template-editor>
       </ng-template>
       <ng-template libTemplate="variables">
         <app-mail-template-variables-config></app-mail-template-variables-config>
