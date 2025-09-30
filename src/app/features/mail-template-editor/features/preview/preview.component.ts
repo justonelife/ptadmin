@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -42,7 +41,6 @@ const TABS: LibTabItem[] = [
     LibLabelComponent,
     FormsModule,
     LibTabsModule,
-    JsonPipe,
   ],
   host: {
     class: 'space-y-4',

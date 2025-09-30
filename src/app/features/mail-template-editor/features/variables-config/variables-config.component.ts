@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -14,7 +13,11 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { Config, LANGUAGES } from '@features/mail-template-editor/data-access';
+import {
+  Config,
+  KeyPipe,
+  LANGUAGES,
+} from '@features/mail-template-editor/data-access';
 import { LibButtonComponent } from '@libs/lib-button';
 import { LibCardComponent } from '@libs/lib-card';
 import { LibChipComponent } from '@libs/lib-chip';
@@ -43,9 +46,9 @@ import { tap } from 'rxjs';
     LibSelectComponent,
     FormsModule,
     LibChipComponent,
-    JsonPipe,
     ReactiveFormsModule,
     MatIconModule,
+    KeyPipe,
   ],
   host: {
     class: 'mt-6 block pb-6 px-1 space-y-6',
@@ -61,9 +64,7 @@ export class VariablesConfigComponent implements ControlValueAccessor {
   variables = new Set<string>();
   newVariable = '';
 
-  onChange: OnChangeType = (v: Config) => {
-    console.log(v);
-  };
+  onChange: OnChangeType = () => null;
 
   onTouched: OnTouchedType = () => null;
 
@@ -71,6 +72,10 @@ export class VariablesConfigComponent implements ControlValueAccessor {
     languages: new FormControl<string[]>([], { nonNullable: true }),
     variables: new FormGroup({}),
   });
+
+  get variablesFormGroup() {
+    return this.form.controls.variables as FormGroup;
+  }
 
   //NOTE: two way
   // tempState: Config = {};
@@ -104,8 +109,8 @@ export class VariablesConfigComponent implements ControlValueAccessor {
 
   addVariable(): void {
     if (!this.newVariable) return;
-    this.variables.add(this.newVariable);
-    this.form.controls.variables.addControl(
+    // this.variables.add(this.newVariable);
+    this.variablesFormGroup.addControl(
       this.newVariable,
       new FormGroup(
         [...this.languages].reduce(
@@ -122,15 +127,32 @@ export class VariablesConfigComponent implements ControlValueAccessor {
   }
 
   writeValue(value: Config): void {
-    console.log(value);
+    // debugger
+    if (!value) return;
+
+    Object.keys(this.variablesFormGroup.controls).forEach((key) => {
+      this.variablesFormGroup.removeControl(key);
+    });
+
+    Object.entries(value.variables).forEach(([variable, v]) => {
+      const obj = v as Record<string, string>;
+      this.variablesFormGroup.addControl(
+        variable,
+        new FormGroup(
+          Object.entries(obj).reduce(
+            (acc, [k, kv]) => ({ ...acc, [k]: new FormControl(kv) }),
+            {}
+          )
+        )
+      );
+      console.log(variable, value);
+    });
+
+    //
+    this.form.patchValue(value);
+    console.log(this.form.value);
     // this.tempState = value;
-    // this.cdr.markForCheck();
-    // this.form = this.fb.group(
-    //   Object.keys(this.config).reduce((acc, variable) => {
-    //     acc[variable] = this.fb.group(this.config[variable]);
-    //     return acc;
-    //   }, {} as Record<string, FormGroup>)
-    // );
+    this.cdr.markForCheck();
   }
 
   registerOnChange(fn: OnChangeType): void {
@@ -142,20 +164,20 @@ export class VariablesConfigComponent implements ControlValueAccessor {
   }
 
   private addLanguageToExistingVariables(language: string): void {
-    Object.keys(this.form.controls.variables.controls).forEach((key) => {
-      const group = this.form.controls.variables.get(key) as FormGroup;
+    Object.keys(this.variablesFormGroup.controls).forEach((key) => {
+      const group = this.variablesFormGroup.get(key) as FormGroup;
       group.addControl(language, new FormControl(''));
     });
   }
 
   private removeLanguageToExistingVariables(language: string): void {
-    Object.keys(this.form.controls.variables).forEach((key) => {
-      const group = this.form.controls.variables.get(key) as FormGroup;
+    Object.keys(this.variablesFormGroup).forEach((key) => {
+      const group = this.variablesFormGroup.get(key) as FormGroup;
       group.removeControl(language);
     });
   }
 
   getVariableForm(variable: string) {
-    return this.form.controls.variables.get(variable) as FormGroup;
+    return this.variablesFormGroup.get(variable) as FormGroup;
   }
 }

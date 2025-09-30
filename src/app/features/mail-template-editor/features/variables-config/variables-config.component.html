@@ -58,7 +58,7 @@
 </div>
 
 <div class="flex gap-2 flex-col">
-  @for (variable of variables; track $index) {
+  @for (variable of form.controls.variables.value | key; track $index) {
     <lib-card>
       <ng-template #title>
         <span

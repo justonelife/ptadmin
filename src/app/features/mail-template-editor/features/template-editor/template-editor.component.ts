@@ -1,13 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   input,
+  output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LibButtonComponent } from '@libs/lib-button';
 import { LibCardComponent } from '@libs/lib-card';
-import { LibChipComponent } from '@libs/lib-chip';
 import { LibTextInputComponent } from '@libs/lib-controller';
 import { LibIconPositionDirective } from '@libs/lib-core';
 
@@ -20,7 +19,6 @@ import { LibIconPositionDirective } from '@libs/lib-core';
     LibIconPositionDirective,
     LibTextInputComponent,
     FormsModule,
-    LibChipComponent,
     LibButtonComponent,
   ],
   host: {
@@ -28,6 +26,12 @@ import { LibIconPositionDirective } from '@libs/lib-core';
   },
 })
 export class TemplateEditorComponent {
-  @Input() template = '';
+  template = input<string>('');
   variables = input<string[]>([]);
+
+  templateChange = output<string>();
+
+  valueChange(value: string) {
+    this.templateChange.emit(value);
+  }
 }

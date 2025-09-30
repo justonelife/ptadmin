@@ -3,7 +3,8 @@
     <lib-tabs [tabs]="TABS" perserveContent>
       <ng-template libTemplate="template-editor">
         <app-mail-template-editor
-          [template]="template"
+          [template]="template()"
+          (templateChange)="templateChange($event)"
           [variables]="config.variables | key"
         ></app-mail-template-editor>
       </ng-template>

@@ -10,7 +10,7 @@
     </span>
   </ng-template>
 
-  <div class="h-10 flex gap-1 flex-wrap items-center">
+  <div class="min-h-10 flex gap-1 flex-wrap items-center">
     @for (variable of variables(); track $index) {
       <button
         lib-button
@@ -28,5 +28,6 @@
 <lib-text-input
   type="textarea"
   [rows]="20"
-  [(ngModel)]="template"
+  [ngModel]="template()"
+  (ngModelChange)="valueChange($event)"
 ></lib-text-input>

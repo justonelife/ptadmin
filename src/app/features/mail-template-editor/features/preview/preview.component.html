@@ -83,12 +83,11 @@
 
 <lib-tabs [tabs]="TABS">
   <ng-template libTemplate="live-preview">
-    <div class="flex w-full h-[500px]">
+    <div class="flex w-full h-[500px] mt-4">
       @if (test(); as temp) {
         <iframe class="w-full h-full" [srcdoc]="temp"></iframe>
       }
     </div>
-    <pre>{{ data() | json }}</pre>
   </ng-template>
   <ng-template libTemplate="code-preview">code</ng-template>
 </lib-tabs>
