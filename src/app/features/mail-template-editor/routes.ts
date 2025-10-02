@@ -14,4 +14,20 @@ export const routes: Routes = [
         ),
     },
   },
+  {
+    path: 'v2',
+    loadComponent: () =>
+      import('./features/shell-v2/shell.component').then(
+        (c) => c.ShellComponent
+      ),
+    title: 'Mail Template Editor V2',
+    data: {
+      subTitle: 'Create localized email templates',
+
+      // component: () =>
+      //   import('./features/actions/actions.component').then(
+      //     (c) => c.ActionsComponent
+      //   ),
+    },
+  },
 ];

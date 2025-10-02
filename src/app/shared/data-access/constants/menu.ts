@@ -22,6 +22,12 @@ export const MENU: NavItem[] = [
         icon: 'stacked_email',
         iconSet: 'outlined',
       },
+      {
+        title: 'Mail Template Editor V2',
+        path: 'playground/mail-template-editor/v2',
+        icon: 'stacked_email',
+        iconSet: 'outlined',
+      },
     ],
   },
 ];
