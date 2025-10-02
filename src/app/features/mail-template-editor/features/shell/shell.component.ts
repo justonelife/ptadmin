@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -44,7 +43,6 @@ const TABS: LibTabItem[] = [
     PreviewComponent,
     FormsModule,
     KeyPipe,
-    JsonPipe,
   ],
 })
 export class ShellComponent {
@@ -55,24 +53,8 @@ export class ShellComponent {
 
   template = signal(mock);
 
-  // template = signal(`<!DOCTYPE html>
-  //  <html>
-  //  <head>
-  //   <meta charset="UTF-8">
-  //   <title>Welcome Email</title>
-  //  </head>
-  //  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-  //   <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-  //       <h1 style="color: #2563eb;">Hello {{firstName}}!</h1>
-  //       <a href="{login_link}" target="_blank">Login</a>
-  //       <p>Welcome to {{companyName}}. We're excited to have you on board.</p>
-  //       <p>Best regards,<br>The {{companyName}} Team</p>
-  //   </div>
-  //  </body>
-  //  </html>`);
-
   config: Config = {
-    languages: ['en'],
+    languages: ['en', 'pt', 'es', 'de', 'zh'],
     variables: mock_variables,
   };
   result: PreviewResult = {};

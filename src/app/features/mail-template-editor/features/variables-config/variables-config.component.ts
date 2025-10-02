@@ -16,12 +16,14 @@ import { MatIconModule } from '@angular/material/icon';
 import {
   Config,
   KeyPipe,
+  LanguageLabelPipe,
   LANGUAGES,
 } from '@features/mail-template-editor/data-access';
 import { LibButtonComponent } from '@libs/lib-button';
 import { LibCardComponent } from '@libs/lib-card';
 import { LibChipComponent } from '@libs/lib-chip';
 import {
+  LibControllerWrapperComponent,
   LibSelectComponent,
   LibTextInputComponent,
 } from '@libs/lib-controller';
@@ -49,6 +51,8 @@ import { tap } from 'rxjs';
     ReactiveFormsModule,
     MatIconModule,
     KeyPipe,
+    LanguageLabelPipe,
+    LibControllerWrapperComponent,
   ],
   host: {
     class: 'mt-6 block pb-6 px-1 space-y-6',
@@ -58,10 +62,8 @@ import { tap } from 'rxjs';
 export class VariablesConfigComponent implements ControlValueAccessor {
   readonly cdr = inject(ChangeDetectorRef);
   readonly LANGUAGES = LANGUAGES;
-  languages = new Set<string>();
-  selectedLanguage = '';
 
-  variables = new Set<string>();
+  selectedLanguage = '';
   newVariable = '';
 
   onChange: OnChangeType = () => null;
@@ -77,15 +79,23 @@ export class VariablesConfigComponent implements ControlValueAccessor {
     return this.form.controls.variables as FormGroup;
   }
 
-  //NOTE: two way
-  // tempState: Config = {};
-
   constructor() {
     this.form.valueChanges
       .pipe(
         tap((value) => {
-          console.log(value);
           this.onChange(value);
+        }),
+        takeUntilDestroyed()
+      )
+      .subscribe();
+
+    this.form.controls.languages.valueChanges
+      .pipe(
+        tap((value) => {
+          const unique = new Set(value);
+          this.form.controls.languages.setValue([...unique], {
+            emitEvent: false,
+          });
         }),
         takeUntilDestroyed()
       )
@@ -94,26 +104,33 @@ export class VariablesConfigComponent implements ControlValueAccessor {
 
   addLanguage(): void {
     if (!this.selectedLanguage) return;
-    this.languages.add(this.selectedLanguage);
+    // this.languages.add(this.selectedLanguage);
+    const languages = this.form.controls.languages.value;
+    this.form.controls.languages.setValue([
+      ...languages,
+      this.selectedLanguage,
+    ]);
+
     this.addLanguageToExistingVariables(this.selectedLanguage);
+
     this.selectedLanguage = '';
-    this.form.controls.languages.setValue([...this.languages]);
-    this.cdr.markForCheck();
   }
 
   removeLanguage(language: string): void {
-    this.languages.delete(language);
-    this.form.controls.languages.setValue([...this.languages]);
+    const languages = this.form.controls.languages.value;
+    const removeIndex = languages.findIndex((lang) => lang === language);
+    languages.splice(removeIndex, 1);
+    this.form.controls.languages.setValue([...languages]);
     this.removeLanguageToExistingVariables(language);
   }
 
   addVariable(): void {
     if (!this.newVariable) return;
-    // this.variables.add(this.newVariable);
+
     this.variablesFormGroup.addControl(
       this.newVariable,
       new FormGroup(
-        [...this.languages].reduce(
+        [...this.form.controls.languages.value].reduce(
           (acc, cur) => ({
             ...acc,
             [cur]: new FormControl(''),
@@ -127,9 +144,12 @@ export class VariablesConfigComponent implements ControlValueAccessor {
   }
 
   writeValue(value: Config): void {
-    // debugger
     if (!value) return;
 
+    this.patchFormValue(value);
+  }
+
+  private patchFormValue(value: Config): void {
     Object.keys(this.variablesFormGroup.controls).forEach((key) => {
       this.variablesFormGroup.removeControl(key);
     });
@@ -145,13 +165,9 @@ export class VariablesConfigComponent implements ControlValueAccessor {
           )
         )
       );
-      console.log(variable, value);
     });
 
-    //
-    this.form.patchValue(value);
-    console.log(this.form.value);
-    // this.tempState = value;
+    this.form.controls.languages.setValue(value.languages);
     this.cdr.markForCheck();
   }
 

@@ -1,29 +1,57 @@
 @let _mapper = mapper();
 
-<mat-tab-group [preserveContent]="perserveContent()">
-  @for (tab of tabs(); track tab.value) {
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <span
-          libIconPosition="center left"
-          [icon]="tab.icon || ''"
-          iconSet="outlined"
-        >
-          {{ tab.label }}
-        </span>
-      </ng-template>
+@if (eagerLoad()) {
+  <mat-tab-group [preserveContent]="perserveContent()">
+    @for (tab of tabs(); track tab.value) {
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span
+            libIconPosition="center left"
+            [icon]="tab.icon || ''"
+            iconSet="outlined"
+          >
+            {{ tab.label }}
+          </span>
+        </ng-template>
 
-      <ng-template matTabContent>
-        @if (_mapper[tab.value].component) {
+        <ng-container
+          *ngTemplateOutlet="tabTemplate; context: { $implicit: tab }"
+        ></ng-container>
+      </mat-tab>
+    }
+  </mat-tab-group>
+} @else {
+  <mat-tab-group [preserveContent]="perserveContent()">
+    @for (tab of tabs(); track tab.value) {
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <span
+            libIconPosition="center left"
+            [icon]="tab.icon || ''"
+            iconSet="outlined"
+          >
+            {{ tab.label }}
+          </span>
+        </ng-template>
+
+        <ng-template matTabContent>
           <ng-container
-            *ngComponentOutlet="_mapper[tab.value].component | async"
+            *ngTemplateOutlet="tabTemplate; context: { $implicit: tab }"
           ></ng-container>
-        } @else {
-          <ng-container
-            *ngTemplateOutlet="_mapper[tab.value].template"
-          ></ng-container>
-        }
-      </ng-template>
-    </mat-tab>
+        </ng-template>
+      </mat-tab>
+    }
+  </mat-tab-group>
+}
+
+<ng-template #tabTemplate let-tab>
+  @if (_mapper[tab.value].component) {
+    <ng-container
+      *ngComponentOutlet="_mapper[tab.value].component | async"
+    ></ng-container>
+  } @else {
+    <ng-container
+      *ngTemplateOutlet="_mapper[tab.value].template"
+    ></ng-container>
   }
-</mat-tab-group>
+</ng-template>

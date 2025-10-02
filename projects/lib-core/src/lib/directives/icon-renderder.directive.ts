@@ -35,7 +35,7 @@ abstract class AbstractIconRenderer implements IconRenderer {
 
   render(icon: string, iconSet: string) {
     this.clear();
-    this.iconContainer = this.renderer.createElement('div');
+    this.iconContainer = this.renderer.createElement('span');
     this.setup(this.iconContainer!);
     this.helper.appendIcon(
       icon,
@@ -202,7 +202,6 @@ export class LibIconPositionDirective {
   constructor() {
     effect(() => {
       const icon = this.icon();
-      if (!icon) return;
       const strategy = this.renderers.find(
         (renderer) => renderer.position === this.position()
       );

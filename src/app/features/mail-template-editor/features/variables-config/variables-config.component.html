@@ -1,3 +1,5 @@
+@let languages = form.controls.languages.value;
+
 <lib-card class="block">
   <ng-template #title>
     <span class="font-medium text-base inline-flex gap-1 items-center">
@@ -14,7 +16,7 @@
     @for (language of languages; track $index) {
       <lib-chip>
         <span class="flex gap-1 items-center">
-          {{ language }}
+          {{ language | languageLabel }}
           <button
             lib-button
             icon="close"
@@ -45,16 +47,25 @@
   </div>
 </lib-card>
 
-<h3 libIconPosition="center left" icon="language" class="font-semibold">
-  Variables
-</h3>
+<div class="flex gap-2 flex-wrap justify-between">
+  <h3 libIconPosition="center left" icon="language" class="font-semibold">
+    Variables
+  </h3>
+
+  <button lib-button icon="add" severity="neutral" (click)="addVariable()">
+    New Variable
+  </button>
+  <!-- <div class="flex gap-1 items-center min-w-1/2"> -->
+  <!--   <lib-text-input [(ngModel)]="newVariable" class="grow" -->
+  <!--     placeholder="Variable name (e.g., firstName)"></lib-text-input> -->
+  <!--   <button lib-button icon="add" (click)="addVariable()"></button> -->
+  <!-- </div> -->
+</div>
+
 <div class="flex gap-1 items-center">
-  <lib-text-input
-    [(ngModel)]="newVariable"
-    class="grow"
-    placeholder="Variable name (e.g., firstName)"
-  ></lib-text-input>
-  <button lib-button icon="add" (click)="addVariable()"></button>
+  <lib-controller-wrapper icon="search" iconSet="outlined" class="grow">
+    <lib-text-input placeholder="Search variable"></lib-text-input>
+  </lib-controller-wrapper>
 </div>
 
 <div class="flex gap-2 flex-col">
@@ -76,12 +87,13 @@
         </span>
       </ng-template>
 
-      <form [formGroup]="getVariableForm(variable)">
+      <form [formGroup]="getVariableForm(variable)" class="space-y-2">
         @for (language of languages; track $index) {
           <lib-text-input
-            [label]="language"
+            [label]="language | languageLabel"
             [placeholder]="variable + ' in ' + language"
             [formControlName]="language"
+            class="block"
           ></lib-text-input>
         }
       </form>

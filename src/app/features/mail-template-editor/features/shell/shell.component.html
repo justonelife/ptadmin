@@ -1,6 +1,6 @@
 <div class="grid grid-cols-2 gap-2">
   <div>
-    <lib-tabs [tabs]="TABS" perserveContent>
+    <lib-tabs [tabs]="TABS" perserveContent eagerLoad>
       <ng-template libTemplate="template-editor">
         <app-mail-template-editor
           [template]="template()"
@@ -14,7 +14,6 @@
         ></app-mail-template-variables-config>
       </ng-template>
     </lib-tabs>
-    <pre>{{ config | json }}</pre>
   </div>
   <div>
     <app-mail-template-preview [data]="result"></app-mail-template-preview>
