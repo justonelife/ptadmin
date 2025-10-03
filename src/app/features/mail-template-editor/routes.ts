@@ -24,10 +24,10 @@ export const routes: Routes = [
     data: {
       subTitle: 'Create localized email templates',
 
-      // component: () =>
-      //   import('./features/actions/actions.component').then(
-      //     (c) => c.ActionsComponent
-      //   ),
+      component: () =>
+        import('./features/actions-v2/actions.component').then(
+          (c) => c.ActionsComponent
+        ),
     },
   },
 ];

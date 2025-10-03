@@ -4,9 +4,17 @@ import {
   ElementRef,
   inject,
   InjectionToken,
+  input,
   Renderer2,
 } from '@angular/core';
 import { cn } from '../utils/cn';
+
+function stringArrayAttribute(value: unknown): string[] {
+  if (Array.isArray(value)) {
+    return value;
+  }
+  return [];
+}
 
 export const LIB_CLASS_MERGER_SOURCES = new InjectionToken<string[]>(
   'LIB_CLASS_MERGER_SOURCES',
@@ -24,9 +32,18 @@ export class LibClassMergerDirective implements AfterViewInit {
   elementRef = inject(ElementRef);
   renderer = inject(Renderer2);
 
+  sourcesFromInput = input([], {
+    alias: 'libClassMerger',
+    transform: stringArrayAttribute,
+  });
+
   ngAfterViewInit() {
+    const _sources = this.sourcesFromInput()?.length
+      ? this.sourcesFromInput()
+      : this.sources;
+
     const result = cn(
-      ...this.sources.map((v) => this.elementRef.nativeElement.getAttribute(v))
+      ..._sources.map((v) => this.elementRef.nativeElement.getAttribute(v))
     );
     this.renderer.setAttribute(this.elementRef.nativeElement, 'class', result);
   }

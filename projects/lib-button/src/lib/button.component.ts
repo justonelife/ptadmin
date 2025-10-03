@@ -37,7 +37,7 @@ import {
   providers: [
     {
       provide: LIB_CLASS_MERGER_SOURCES,
-      useValue: ['severity-class', 'appearance-class', 'button-class', 'class'],
+      useValue: ['severity-class', 'appearance-class', 'class'],
     },
   ],
 })

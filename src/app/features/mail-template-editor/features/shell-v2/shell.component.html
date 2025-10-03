@@ -1,1 +1,41 @@
-shell v2
+<div class="flex">
+  <div class="w-[250px] p-4">
+    @for (step of STEPS; track $index; let idx = $index) {
+      <app-mail-template-step
+        [icon]="step.icon || ''"
+        [index]="idx"
+        [title]="step.title"
+        [subTitle]="step.subTitle"
+        iconSet="outlined"
+        severity="primary"
+        class="mb-2"
+      ></app-mail-template-step>
+    }
+
+    <lib-card title="Quick Tips" class="mt-8 block">
+      <ul class="list-disc text-xs fg-secondary ps-4 space-y-2">
+        <li>Use variables for dynamic content</li>
+        <li>Preview in multiple languages</li>
+
+        <li>Test on different devices</li>
+      </ul>
+    </lib-card>
+  </div>
+
+  <div class="p-4 grow">
+    <div class="flex justify-between items-center w-full mb-4">
+      <div>
+        Active Languages
+        <br />
+        <span class="text-sm fg-secondary">
+          Manage the languages for your email templates
+        </span>
+      </div>
+      <button type="button" lib-button icon="add" iconSet="outlined">
+        Add Languages
+      </button>
+    </div>
+
+    <app-mail-template-languages-manager></app-mail-template-languages-manager>
+  </div>
+</div>
