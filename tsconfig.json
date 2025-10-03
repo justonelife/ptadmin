@@ -76,12 +76,6 @@
     },
     {
       "path": "./projects/lib-overlay/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/lib-appearance/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/lib-appearance/tsconfig.spec.json"
     }
   ]
 }
