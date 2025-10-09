@@ -3,16 +3,17 @@
     @for (step of STEPS; track $index; let idx = $index) {
       <app-mail-template-step
         [icon]="step.icon || ''"
-        [index]="idx"
+        [step]="step.id"
         [title]="step.title"
         [subTitle]="step.subTitle"
         iconSet="outlined"
         severity="primary"
         class="mb-2"
+        [active]="store.currentStep() === idx"
       ></app-mail-template-step>
     }
 
-    <lib-card title="Quick Tips" class="mt-8 block">
+    <lib-card title="Quick Tips" class="my-8 block">
       <ul class="list-disc text-xs fg-secondary ps-4 space-y-2">
         <li>Use variables for dynamic content</li>
         <li>Preview in multiple languages</li>
@@ -20,22 +21,39 @@
         <li>Test on different devices</li>
       </ul>
     </lib-card>
+    <button
+      type="button"
+      lib-button
+      severity="warning"
+      class="w-full mb-2"
+      (click)="store.goNextStep()"
+      [disabled]="store.currentStep() === STEPS.length - 1"
+    >
+      Next Step
+    </button>
+    <button
+      type="button"
+      lib-button
+      severity="neutral"
+      class="w-full"
+      (click)="store.goPreviousStep()"
+      [disabled]="store.currentStep() === 0"
+    >
+      Previous Step
+    </button>
+    <pre>{{ store.variables() | json }}</pre>
+    <pre>{{ store.languages() | json }}</pre>
   </div>
 
   <div class="p-4 grow">
-    <div class="flex justify-between items-center w-full mb-4">
-      <div>
-        Active Languages
-        <br />
-        <span class="text-sm fg-secondary">
-          Manage the languages for your email templates
-        </span>
-      </div>
-      <button type="button" lib-button icon="add" iconSet="outlined">
-        Add Languages
-      </button>
-    </div>
-
-    <app-mail-template-languages-manager></app-mail-template-languages-manager>
+    @switch (store.currentStep()) {
+      @case (0) {
+        <app-mail-template-languages-manager></app-mail-template-languages-manager>
+      }
+      @case (1) {
+        <app-mail-template-variables-manager></app-mail-template-variables-manager>
+      }
+      @default {}
+    }
   </div>
 </div>

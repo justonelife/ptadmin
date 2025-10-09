@@ -9,7 +9,7 @@ import { LibButtonComponent } from '@libs/lib-button';
   imports: [LibButtonComponent],
   selector: 'app-mail-template-editor-actions-v2',
   template: `
-    <button lib-button (click)="generate()">Continue to Variables</button>
+    some warning here
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

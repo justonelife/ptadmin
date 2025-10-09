@@ -8,3 +8,4 @@ export * from './lib/directives/appearance.directive';
 export * from './lib/directives/can-color.directive';
 export * from './lib/utils/provide-validators';
 export * from './lib/pipes/tw-merge.pipe';
+export * from './lib/pipes/highlight.pipe';

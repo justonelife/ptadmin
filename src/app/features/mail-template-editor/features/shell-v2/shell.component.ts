@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { STEPS } from '@features/mail-template-editor/data-access';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { STEPS, Store } from '@features/mail-template-editor/data-access';
 import { StepComponent } from '@features/mail-template-editor/ui/step/step.component';
 import { LibButtonComponent } from '@libs/lib-button';
 import { LibCardComponent } from '@libs/lib-card';
 import { LanguagesManagerComponent } from '../languages-manager/languages-manager.component';
+import { VariablesManagerComponent } from '../variables-manager/variables-manager.component';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-mail-template-editor-shell-v2',
@@ -14,8 +16,11 @@ import { LanguagesManagerComponent } from '../languages-manager/languages-manage
     LibCardComponent,
     LibButtonComponent,
     LanguagesManagerComponent,
+    VariablesManagerComponent,
+    JsonPipe,
   ],
 })
 export class ShellComponent {
+  readonly store = inject(Store);
   readonly STEPS = STEPS;
 }

@@ -1,14 +1,68 @@
-<lib-card severity="warning">
-  <ng-template #title>
-    <span class="inline-flex justify-between items-center w-full">
-      <p class="text-base">English</p>
-      <button
-        type="button"
-        lib-button
-        icon="close"
-        severity="neutral"
-        appearance="ghost"
-      ></button>
+<div class="flex justify-between items-center w-full mb-4">
+  <div>
+    Active Languages
+    <br />
+    <span class="text-sm fg-secondary">
+      Manage the languages for your email templates
     </span>
-  </ng-template>
-</lib-card>
+  </div>
+
+  @if (!showAddForm) {
+    <button
+      type="button"
+      lib-button
+      icon="add"
+      iconSet="outlined"
+      (click)="showAddForm = true"
+    >
+      Add Language
+    </button>
+  }
+</div>
+
+@if (showAddForm) {
+  <div class="flex mb-4 gap-2 items-center">
+    <lib-select
+      [options]="LANGUAGES"
+      class="grow"
+      [ngModel]="selectedLanguage"
+      (ngModelChange)="addLanguage($event)"
+    ></lib-select>
+    <button
+      type="button"
+      lib-button
+      (click)="showAddForm = false"
+      appearance="outlined"
+    >
+      Cancel
+    </button>
+  </div>
+}
+
+@for (language of store.languages(); track language; let idx = $index) {
+  <lib-card
+    severity="warning"
+    class="block mb-2 language"
+    animate.enter="animation-enter--fade"
+    animate.leave="animation-leave--fade"
+  >
+    <ng-template #title>
+      <span class="inline-flex justify-between items-center w-full ps-4">
+        <span class="inline-flex flex-col font-normal">
+          <p class="text-base inline-flex gap-2">
+            {{ language | languageLabel }}
+          </p>
+          <span class="fg-secondary text-xs uppercase">{{ language }}</span>
+        </span>
+        <button
+          type="button"
+          lib-button
+          icon="close"
+          severity="error"
+          appearance="ghost"
+          (click)="store.removeLanguageAt(idx)"
+        ></button>
+      </span>
+    </ng-template>
+  </lib-card>
+}

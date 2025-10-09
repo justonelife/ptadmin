@@ -10,7 +10,9 @@ import {
 @Component({
   selector: 'lib-chip',
   template: `
-    <ng-content></ng-content>
+    <span class="align-middle">
+      <ng-content></ng-content>
+    </span>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [

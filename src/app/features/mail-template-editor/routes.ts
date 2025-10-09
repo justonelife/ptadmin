@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { Store } from './data-access';
 
 export const routes: Routes = [
   {
@@ -29,5 +30,6 @@ export const routes: Routes = [
           (c) => c.ActionsComponent
         ),
     },
+    providers: [Store],
   },
 ];

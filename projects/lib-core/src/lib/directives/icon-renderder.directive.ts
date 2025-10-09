@@ -35,6 +35,8 @@ abstract class AbstractIconRenderer implements IconRenderer {
 
   render(icon: string, iconSet: string) {
     this.clear();
+    if (!icon) return;
+
     this.iconContainer = this.renderer.createElement('span');
     this.setup(this.iconContainer!);
     this.helper.appendIcon(
@@ -197,7 +199,7 @@ export class LibIconPositionDirective {
     alias: 'libIconPosition',
   });
   icon = input<string>('');
-  iconSet = input<string>('');
+  iconSet = input<string>('outlined');
 
   constructor() {
     effect(() => {

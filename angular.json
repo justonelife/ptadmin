@@ -49,7 +49,10 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "define": {
+                "process.env.NG_APP_PUBLIC_REGISTRATION": "false"
+              }
             },
             "development": {
               "optimization": false,

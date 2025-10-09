@@ -12,6 +12,10 @@ export class IconModule {
       'material-icons mat-ligature-font size-20'
     );
     iconRegistry.registerFontClassAlias(
+      'filled-sm',
+      'material-icons mat-ligature-font size-10'
+    );
+    iconRegistry.registerFontClassAlias(
       'outlined',
       'material-symbols-outlined mat-ligature-font material-icons size-20' //TODO: find better way than hardcode size-20
     );

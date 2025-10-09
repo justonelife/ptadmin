@@ -1,0 +1,114 @@
+@let _languages = store.languages();
+
+<div class="flex justify-between items-center w-full mb-4">
+  <div>
+    Template Variables
+    <br />
+    <span class="text-sm fg-secondary">
+      Define dynamic content for your email templates
+    </span>
+  </div>
+
+  @if (!showAddForm) {
+    <button
+      type="button"
+      lib-button
+      icon="add"
+      iconSet="outlined"
+      (click)="showAddForm = true"
+    >
+      New Variable
+    </button>
+  }
+</div>
+
+<lib-text-input
+  placeholder="Search variables..."
+  class="mb-4 block"
+  [(ngModel)]="search"
+></lib-text-input>
+
+@if (showAddForm) {
+  <div class="flex flex-col mb-4 gap-1 border border-blue-500 p-4 rounded-md">
+    <div class="flex">
+      <lib-controller-wrapper
+        class="grow"
+        label="Variable Key"
+        icon="code"
+        iconSet="outlined"
+      >
+        <lib-text-input
+          placeholder="e.g., header_title"
+          [(ngModel)]="newVariable"
+        ></lib-text-input>
+      </lib-controller-wrapper>
+    </div>
+
+    <span class="text-sm fg-secondary ps-2">
+      Use lowercase with underscores (e.g., user_name)
+    </span>
+
+    <div class="flex gap-2">
+      <button type="button" lib-button (click)="onAddVariable()">
+        Add Variable
+      </button>
+      <button
+        type="button"
+        lib-button
+        (click)="showAddForm = false"
+        appearance="outlined"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+}
+
+@for (
+  variable of store.variables() | keyvalue | searchVariable: search;
+  track variable.key
+) {
+  <lib-card
+    withToggle
+    class="block mb-4"
+    animate.enter="animation-enter--fade"
+    animate.leave="animation-leave--fade"
+  >
+    <ng-template #title>
+      <span
+        libIconPosition="center left"
+        icon="code"
+        iconSet="outlined"
+        [libSeverity]="variable.value | variableCardSeverity: _languages"
+        [libClassMerger]="['severity-class', 'appearance-class', 'class']"
+        libAppearance="ghost"
+      >
+        <span class="text-base font-normal">
+          <span class="fg-primary">
+            &#123;&#123;
+            <span [innerHTML]="variable.key | libHighlight: search"></span>
+            &#125;&#125;
+          </span>
+          <br />
+          <span class="fg-secondary text-xs">
+            {{ variable.value | variableCardCountCompleted: _languages }} of
+            {{ _languages.length }} languages completed
+          </span>
+        </span>
+        <button
+          type="button"
+          lib-button
+          appearance="ghost"
+          severity="neutral"
+          icon="delete"
+          class="ms-auto"
+          (click)="store.removeVariable(variable.key)"
+        ></button>
+      </span>
+    </ng-template>
+
+    <form [formGroup]="tempForm">
+      <lib-dynamic-form [fields]="FIELDS"></lib-dynamic-form>
+    </form>
+  </lib-card>
+}

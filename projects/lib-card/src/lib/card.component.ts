@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   contentChild,
@@ -13,6 +14,7 @@ import {
   LibSeverityDirective,
   LibIconPositionDirective,
 } from '@libs/lib-core';
+import { LibButtonComponent } from '@libs/lib-button';
 
 @Component({
   selector: 'lib-card',
@@ -21,23 +23,56 @@ import {
     LibSeverityDirective,
     LibIconPositionDirective,
     NgTemplateOutlet,
+    LibButtonComponent,
   ],
   template: `
+    @let _withToggle = withToggle();
     <mat-card [libSeverity]="severity()" [appearance]="appearance()">
       <mat-card-header>
         @if (titleTemplate(); as _titleTemplate) {
           <mat-card-title>
-            <ng-container *ngTemplateOutlet="_titleTemplate"></ng-container>
+            <div class="flex gap-1 items-center">
+              <div class="grow">
+                <ng-container *ngTemplateOutlet="_titleTemplate"></ng-container>
+              </div>
+              @if (_withToggle) {
+                <button
+                  type="button"
+                  lib-button
+                  [icon]="
+                    isVisible ? 'keyboard_arrow_down' : 'keyboard_arrow_up'
+                  "
+                  appearance="ghost"
+                  severity="neutral"
+                  (click)="isVisible = !isVisible"
+                ></button>
+              }
+            </div>
           </mat-card-title>
         } @else if (title()) {
           <!-- NOTE: flex! for icon position working properly-->
           <mat-card-title
             libIconPosition="center left"
             [icon]="titleIcon()"
-            iconSet="outlined"
             class="flex!"
           >
-            {{ title() }}
+            <div class="flex gap-1 items-center">
+              <div class="grow">
+                {{ title() }}
+              </div>
+              @if (_withToggle) {
+                <button
+                  type="button"
+                  lib-button
+                  [icon]="
+                    isVisible ? 'keyboard_arrow_down' : 'keyboard_arrow_up'
+                  "
+                  appearance="ghost"
+                  severity="neutral"
+                  (click)="isVisible = !isVisible"
+                ></button>
+              }
+            </div>
           </mat-card-title>
         }
 
@@ -51,7 +86,11 @@ import {
           </mat-card-subtitle>
         }
       </mat-card-header>
-      <mat-card-content><ng-content></ng-content></mat-card-content>
+      <mat-card-content>
+        @if (isVisible) {
+          <ng-content></ng-content>
+        }
+      </mat-card-content>
     </mat-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -76,4 +115,8 @@ export class LibCardComponent {
 
   subTitle = input<string>();
   subTitleTemplate = contentChild<TemplateRef<unknown>>('subTitle');
+
+  withToggle = input(false, { transform: booleanAttribute });
+
+  isVisible = true;
 }
