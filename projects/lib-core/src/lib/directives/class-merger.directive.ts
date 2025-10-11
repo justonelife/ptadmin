@@ -38,6 +38,9 @@ export class LibClassMergerDirective implements AfterViewInit {
   });
 
   ngAfterViewInit() {
+    // FIXME: [libSeverity]="willChange" then classMerger not recompute class because it run only 1 time AfterViewInit
+    // and also it can not be notified about other directive's changes
+
     const _sources = this.sourcesFromInput()?.length
       ? this.sourcesFromInput()
       : this.sources;

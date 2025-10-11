@@ -1,10 +1,10 @@
-import { Directive, input } from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 import { LibSeverity } from '../types';
 
 @Directive({
   selector: '[libSeverity]',
   host: {
-    '[attr.severity-class]': 'klass',
+    '[attr.severity-class]': 'klass()',
   },
 })
 export class LibSeverityDirective {
@@ -16,8 +16,9 @@ export class LibSeverityDirective {
     info: 'bg-cyan-600 border-cyan-600 text-cyan-600 hover:bg-cyan-700 focus-visible:ring-cyan-500/50',
     error:
       'bg-red-600 border-red-600 text-red-600 hover:bg-red-700 focus-visible:ring-red-500/50',
-    primary:
-      'bg-blue-500 border-blue-500 text-blue-500 hover:bg-blue-600 focus-visible:ring-blue-500/50',
+    primary: `bg-blue-500 border-blue-500 text-blue-500 hover:bg-blue-600 focus-visible:ring-blue-500/50
+      disabled:bg-blue-500/50
+      `,
     secondary:
       'bg-gray-600 border-gray-600 text-gray-600 hover:bg-gray-700 focus-visible:ring-gray-500/50',
     warning: `bg-amber-500 border-amber-500 text-amber-500 hover:bg-amber-600 focus-visible:ring-amber-500/50
@@ -28,12 +29,19 @@ export class LibSeverityDirective {
   };
 
   severity = input<LibSeverity>('primary', { alias: 'libSeverity' });
-
-  get klass() {
+  klass = computed(() => {
     const severity = this.severity();
     if (severity) {
       return this.CLASS_MAPPER[severity];
     }
     return '';
-  }
+  });
+
+  // get klass() {
+  //   const severity = this.severity();
+  //   if (severity) {
+  //     return this.CLASS_MAPPER[severity];
+  //   }
+  //   return '';
+  // }
 }

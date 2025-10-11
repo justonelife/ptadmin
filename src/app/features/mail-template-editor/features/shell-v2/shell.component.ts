@@ -6,6 +6,7 @@ import { LibCardComponent } from '@libs/lib-card';
 import { LanguagesManagerComponent } from '../languages-manager/languages-manager.component';
 import { VariablesManagerComponent } from '../variables-manager/variables-manager.component';
 import { JsonPipe } from '@angular/common';
+import { LivePreviewComponent } from '../live-preview/live-preview.component';
 
 @Component({
   selector: 'app-mail-template-editor-shell-v2',
@@ -18,6 +19,7 @@ import { JsonPipe } from '@angular/common';
     LanguagesManagerComponent,
     VariablesManagerComponent,
     JsonPipe,
+    LivePreviewComponent,
   ],
 })
 export class ShellComponent {

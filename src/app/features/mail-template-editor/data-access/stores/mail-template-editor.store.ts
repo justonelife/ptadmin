@@ -1,5 +1,12 @@
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withHooks,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { STEP } from '../types';
+import { explicitEffect } from 'ngxtension/explicit-effect';
 
 interface State {
   currentStep: STEP;
@@ -11,10 +18,7 @@ const initialState: State = {
   currentStep: STEP.LANGUAGES_SETUP,
   languages: ['en'],
   variables: {
-    header_title: {},
-    greeting: {
-      en: 'Hello!',
-    },
+    title: {},
   },
 };
 
@@ -36,7 +40,12 @@ export const Store = signalStore(
     addVariable(variable: string): void {
       if (!variable || store.variables()[variable]) return;
       patchState(store, {
-        variables: { ...store.variables(), [variable]: {} },
+        variables: {
+          ...store.variables(),
+          [variable]: store
+            .languages()
+            .reduce((acc, cur) => ({ ...acc, [cur]: '' }), {}),
+        },
       });
     },
     removeVariable(key: string): void {
@@ -48,5 +57,34 @@ export const Store = signalStore(
     goPreviousStep(): void {
       patchState(store, { currentStep: store.currentStep() - 1 });
     },
-  }))
+    updateVariables(value: State['variables']): void {
+      patchState(store, { variables: { ...store.variables(), ...value } });
+    },
+  })),
+  withHooks({
+    onInit(store) {
+      explicitEffect([store.languages], ([_languages]) => {
+        const entries = Object.entries(store.variables()).map(
+          ([variable, valueInLanguages]) => {
+            let newValueInLanguages: Record<string, string> = {};
+            _languages.forEach((lang) => {
+              if (
+                !Object.prototype.hasOwnProperty.call(valueInLanguages, lang)
+              ) {
+                newValueInLanguages = { ...newValueInLanguages, [lang]: '' };
+              } else {
+                newValueInLanguages = {
+                  ...newValueInLanguages,
+                  [lang]: valueInLanguages[lang],
+                };
+              }
+            });
+
+            return [variable, newValueInLanguages];
+          }
+        );
+        patchState(store, { variables: Object.fromEntries(entries) });
+      });
+    },
+  })
 );

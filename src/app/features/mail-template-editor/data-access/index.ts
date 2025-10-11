@@ -5,5 +5,6 @@ export * from './pipes/language-label.pipe';
 export * from './pipes/variable-card-severity.pipe';
 export * from './pipes/variable-card-count-completed.pipe';
 export * from './pipes/search-variable.pipe';
+export * from './pipes/variable-card-language-inputs.pipe';
 export * from './services/mail-template-editor.service';
 export * from './stores/mail-template-editor.store';

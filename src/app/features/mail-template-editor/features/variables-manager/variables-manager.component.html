@@ -22,11 +22,12 @@
   }
 </div>
 
-<lib-text-input
-  placeholder="Search variables..."
-  class="mb-4 block"
-  [(ngModel)]="search"
-></lib-text-input>
+<lib-controller-wrapper class="mb-4 block" icon="search" iconSet="outlined">
+  <lib-text-input
+    placeholder="Search variables..."
+    [(ngModel)]="search"
+  ></lib-text-input>
+</lib-controller-wrapper>
 
 @if (showAddForm) {
   <div class="flex flex-col mb-4 gap-1 border border-blue-500 p-4 rounded-md">
@@ -39,7 +40,7 @@
       >
         <lib-text-input
           placeholder="e.g., header_title"
-          [(ngModel)]="newVariable"
+          [formControl]="variableControl"
         ></lib-text-input>
       </lib-controller-wrapper>
     </div>
@@ -49,7 +50,12 @@
     </span>
 
     <div class="flex gap-2">
-      <button type="button" lib-button (click)="onAddVariable()">
+      <button
+        type="button"
+        lib-button
+        (click)="onAddVariable()"
+        [disabled]="variableControl.invalid"
+      >
         Add Variable
       </button>
       <button
@@ -68,12 +74,7 @@
   variable of store.variables() | keyvalue | searchVariable: search;
   track variable.key
 ) {
-  <lib-card
-    withToggle
-    class="block mb-4"
-    animate.enter="animation-enter--fade"
-    animate.leave="animation-leave--fade"
-  >
+  <lib-card withToggle class="block mb-4">
     <ng-template #title>
       <span
         libIconPosition="center left"
@@ -107,8 +108,12 @@
       </span>
     </ng-template>
 
-    <form [formGroup]="tempForm">
-      <lib-dynamic-form [fields]="FIELDS"></lib-dynamic-form>
-    </form>
+    @if (getForm(variable.key); as _form) {
+      <form class="mb-4" [formGroup]="_form">
+        <lib-dynamic-form
+          [fields]="_languages | variableCardLanguageInputs"
+        ></lib-dynamic-form>
+      </form>
+    }
   </lib-card>
 }
