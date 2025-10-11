@@ -24,20 +24,6 @@
       container-vertical-padding: 4px,
     )
   );
-  @include mat.button-toggle-overrides(
-    (
-      shape: var(--radius-md),
-      background-color: transparent,
-      selected-state-background-color: light-dark(
-          var(--app-color-white),
-          var(--app-color-black)
-        ),
-      height: 30px,
-      text-color: var(--color-gray-400),
-      selected-state-text-color: inherit,
-      divider-color: transparent,
-    )
-  );
   @include mat.sidenav-overrides(
     (
       container-shape: 0,

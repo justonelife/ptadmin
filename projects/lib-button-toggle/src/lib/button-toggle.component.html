@@ -1,0 +1,11 @@
+<mat-button-toggle-group
+  [(ngModel)]="state"
+  (ngModelChange)="selectChange()"
+  [hideSingleSelectionIndicator]="true"
+>
+  @for (option of options(); track option) {
+    <mat-button-toggle [value]="option.value">
+      {{ option.label }}
+    </mat-button-toggle>
+  }
+</mat-button-toggle-group>

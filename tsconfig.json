@@ -76,6 +76,12 @@
     },
     {
       "path": "./projects/lib-overlay/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/lib-button-toggle/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/lib-button-toggle/tsconfig.spec.json"
     }
   ]
 }

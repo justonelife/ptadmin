@@ -1,5 +1,5 @@
 <div class="flex">
-  <div class="w-[250px] p-4">
+  <div class="w-[250px] min-w-[250px] p-4">
     @for (step of STEPS; track $index; let idx = $index) {
       <app-mail-template-step
         [icon]="step.icon || ''"
@@ -41,8 +41,8 @@
     >
       Previous Step
     </button>
-    <pre>{{ store.variables() | json }}</pre>
-    <pre>{{ store.languages() | json }}</pre>
+    <!-- <pre>{{ store.variables() | json }}</pre> -->
+    <!-- <pre>{{ store.languages() | json }}</pre> -->
   </div>
 
   <div class="p-4 grow">
