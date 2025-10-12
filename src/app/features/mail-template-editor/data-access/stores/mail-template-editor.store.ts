@@ -5,8 +5,8 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import { STEP } from '../types';
 import { explicitEffect } from 'ngxtension/explicit-effect';
+import { STEP } from '../types';
 
 const mock_variables = {
   // Headers & Titles
@@ -285,7 +285,7 @@ interface State {
 
 const initialState: State = {
   currentStep: STEP.LANGUAGES_SETUP,
-  languages: ['en'],
+  languages: ['en', 'es', 'pt', 'de'],
   variables: mock_variables,
 };
 
@@ -319,9 +319,11 @@ export const Store = signalStore(
       delete store.variables()[key];
     },
     goNextStep(): void {
+      if (store.currentStep() === STEP.PREVIEW) return;
       patchState(store, { currentStep: store.currentStep() + 1 });
     },
     goPreviousStep(): void {
+      if (store.currentStep() === 0) return;
       patchState(store, { currentStep: store.currentStep() - 1 });
     },
     updateVariables(value: State['variables']): void {
