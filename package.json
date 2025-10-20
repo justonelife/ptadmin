@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch",
+    "test:all": "node scripts/test-all.js",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless --progress=false",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",

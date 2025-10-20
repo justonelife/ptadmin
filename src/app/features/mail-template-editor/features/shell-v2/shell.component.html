@@ -14,7 +14,7 @@
     }
 
     <lib-card title="Quick Tips" class="my-8 block">
-      <ul class="list-disc text-xs fg-secondary ps-4 space-y-2">
+      <ul class="list-disc text-xs fg-primary ps-4 space-y-2 mt-2">
         <li>Use variables for dynamic content</li>
         <li>Preview in multiple languages</li>
 
@@ -41,8 +41,31 @@
     >
       Previous Step
     </button>
-    <!-- <pre>{{ store.variables() | json }}</pre> -->
-    <!-- <pre>{{ store.languages() | json }}</pre> -->
+
+    <!-- @if (store.currentStep() === STEPS.length - 1) { -->
+    <!--   <lib-card withToggle class="block mt-6"> -->
+    <!--     <ng-template #title> -->
+    <!--       <span class="font-medium text-base inline-flex gap-1 items-center"> -->
+    <!--         <span -->
+    <!--           libIconPosition="center left" -->
+    <!--           icon="data_object" -->
+    <!--           iconSet="outlined" -->
+    <!--         ></span> -->
+    <!--         <span class="fg-primary">Variables</span> -->
+    <!--       </span> -->
+    <!--     </ng-template> -->
+    <!---->
+    <!--     <div -->
+    <!--       class="h-[250px] overflow-y-auto flex gap-1 flex-wrap items-center mt-2" -->
+    <!--     > -->
+    <!--       @for (variable of store.variables() | keyvalue; track variable.key) { -->
+    <!--         <button lib-button class="p-1 h-6 break-all" severity="neutral"> -->
+    <!--           {{ variable.key }} -->
+    <!--         </button> -->
+    <!--       } -->
+    <!--     </div> -->
+    <!--   </lib-card> -->
+    <!-- } -->
   </div>
 
   <div class="p-4 grow">

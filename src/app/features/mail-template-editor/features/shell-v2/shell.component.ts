@@ -5,7 +5,7 @@ import { LibButtonComponent } from '@libs/lib-button';
 import { LibCardComponent } from '@libs/lib-card';
 import { LanguagesManagerComponent } from '../languages-manager/languages-manager.component';
 import { VariablesManagerComponent } from '../variables-manager/variables-manager.component';
-import { JsonPipe } from '@angular/common';
+
 import { LivePreviewComponent } from '../live-preview/live-preview.component';
 
 @Component({
@@ -18,7 +18,6 @@ import { LivePreviewComponent } from '../live-preview/live-preview.component';
     LibButtonComponent,
     LanguagesManagerComponent,
     VariablesManagerComponent,
-    JsonPipe,
     LivePreviewComponent,
   ],
 })

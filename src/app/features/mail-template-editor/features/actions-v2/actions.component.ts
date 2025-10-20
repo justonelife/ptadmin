@@ -9,11 +9,14 @@ import { LibButtonComponent } from '@libs/lib-button';
   imports: [LibButtonComponent],
   selector: 'app-mail-template-editor-actions-v2',
   template: `
-    some warning here
+    <button lib-button icon="file_export" iconSet="outlined">
+      Export JSON
+    </button>
+    <button lib-button icon="place_item" iconSet="outlined">Import JSON</button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'flex gap-4 items-center',
+    class: 'flex gap-2 items-center',
   },
 })
 export class ActionsComponent {

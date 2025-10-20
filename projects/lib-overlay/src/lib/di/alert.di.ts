@@ -30,7 +30,7 @@ export function provideAlertComponent(component: IAlertComponent) {
 const DEFAULT_CONFIG: AlertConfig = {
   lifetime: 2_000,
   icon: 'info',
-  appearance: 'soft',
+  appearance: 'raised',
   error: {
     icon: 'cancel',
   },
