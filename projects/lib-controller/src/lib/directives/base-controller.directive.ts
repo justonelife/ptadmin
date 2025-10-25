@@ -1,7 +1,9 @@
 import {
   ChangeDetectorRef,
+  DestroyRef,
   Directive,
   inject,
+  OnInit,
   signal,
   Signal,
 } from '@angular/core';
@@ -17,8 +19,11 @@ import { DYNAMIC_CONTROL } from '../pipes/dynamic-control.pipe';
     '[class.lib-controller--error]': 'hasError()',
   },
 })
-export abstract class LibBaseController<T> implements ControlValueAccessor {
+export abstract class LibBaseController<T>
+  implements ControlValueAccessor, OnInit
+{
   dynamicControl = inject(DYNAMIC_CONTROL, { optional: true });
+  destroyRef = inject(DestroyRef);
 
   cdr = inject(ChangeDetectorRef);
   onChange: OnChangeType = (v: T) => {
@@ -33,7 +38,7 @@ export abstract class LibBaseController<T> implements ControlValueAccessor {
 
   hasError = signal<boolean>(false);
 
-  constructor() {
+  ngOnInit() {
     this.listenValueChanges();
     this.listenStatusChanges();
     this.listenAndMarkControlDirty();
@@ -46,7 +51,7 @@ export abstract class LibBaseController<T> implements ControlValueAccessor {
         tap((value) => {
           this.writeValue(value);
         }),
-        takeUntilDestroyed()
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
@@ -58,7 +63,7 @@ export abstract class LibBaseController<T> implements ControlValueAccessor {
         tap(() => {
           this.hasError.set(!!this.dynamicControl?.errors);
         }),
-        takeUntilDestroyed()
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
@@ -71,7 +76,7 @@ export abstract class LibBaseController<T> implements ControlValueAccessor {
           this.dynamicControl?.markAsDirty();
           this.onTouched();
         }),
-        takeUntilDestroyed()
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+/* eslint-disable @angular-eslint/component-selector */
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
 import {
   LIB_CLASS_MERGER_SOURCES,
   LibAppearanceDirective,
@@ -7,9 +13,9 @@ import {
   LibSeverityDirective,
 } from '@libs/lib-core';
 
+type ButtonSize = 'small' | 'medium' | 'large';
+
 @Component({
-  //FIXME: set lint-staged in package.json to max-warnings=0
-  /* eslint-disable @angular-eslint/component-selector */
   selector: 'a[lib-button], button[lib-button]',
   template: `
     <ng-content />
@@ -31,9 +37,7 @@ import {
     LibClassMergerDirective,
   ],
   host: {
-    class: `cursor-pointer disabled:cursor-not-allowed
-      inline-flex items-center justify-center
-      p-1 px-4 font-semibold h-[32px] text-xs rounded-md`,
+    '[class]': 'styleClass()',
   },
   providers: [
     {
@@ -42,4 +46,18 @@ import {
     },
   ],
 })
-export class LibButtonComponent {}
+export class LibButtonComponent {
+  readonly SIZE_MAPPER: Record<ButtonSize, string> = {
+    small: 'h-[32px] text-xs rounded-md',
+    medium: 'h-[40px] text-md rounded-md',
+    large: 'h-[52px] text-lg rounded-full',
+  };
+
+  size = input<ButtonSize>('small');
+
+  styleClass = computed(() => {
+    return `cursor-pointer disabled:cursor-not-allowed
+      inline-flex items-center justify-center
+      p-1 px-4 font-semibold ${this.SIZE_MAPPER[this.size()]}`;
+  });
+}

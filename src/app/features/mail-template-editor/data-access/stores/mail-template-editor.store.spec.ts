@@ -17,7 +17,7 @@ describe('it should test mail template editor Store', () => {
     store.addVariable('greeting');
   });
 
-  xit('it should have correct initial state', () => {
+  it('it should have correct initial state', () => {
     expect(store.currentStep()).toBe(STEP.LANGUAGES_SETUP);
     expect(store.languages()).toEqual(['en', 'de']);
     expect(store.variables()).toEqual({

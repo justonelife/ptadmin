@@ -15,10 +15,10 @@ import { LibLabelComponent } from '../label/label.component';
       py-0
       px-2
       bg-white
-      dark:bg-black
+      dark:bg-slate-900
       border
       border-gray-300
-      dark:border-stone-800
+      dark:border-slate-700
       rounded-md
       focus:outline-none
       focus:border-transparent

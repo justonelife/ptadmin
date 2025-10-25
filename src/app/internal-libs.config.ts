@@ -22,6 +22,7 @@ export const internalLibsProviders: (Provider | EnvironmentProviders)[] = [
     banwords: ({ banwords }: { banwords: string }) =>
       `Contain banned word ${banwords}`,
     banvalue: 'This value be banned',
+    email: 'Invalid email',
   }),
   provideCustomValidators({
     banwords: banWordsValidator,

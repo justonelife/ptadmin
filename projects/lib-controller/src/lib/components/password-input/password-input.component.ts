@@ -7,6 +7,7 @@ import {
   PipeTransform,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   AbstractControl,
   FormControl,
@@ -80,10 +81,6 @@ export class LibPasswordInputComponent
 
   inputType = signal<InputType>('password');
 
-  toggleInputType(): void {
-    this.inputType.update((type) => (type === 'text' ? 'password' : 'text'));
-  }
-
   mediumRegex = input<RegExp>(
     /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/
   );
@@ -102,10 +99,17 @@ export class LibPasswordInputComponent
       .pipe(
         tap((value) => {
           this.onChange(value);
-          this.onValidatorChange();
-        })
+          if (this.onValidatorChange) {
+            this.onValidatorChange();
+          }
+        }),
+        takeUntilDestroyed()
       )
       .subscribe();
+  }
+
+  toggleInputType(): void {
+    this.inputType.update((type) => (type === 'text' ? 'password' : 'text'));
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
@@ -123,5 +127,9 @@ export class LibPasswordInputComponent
 
   registerOnValidatorChange?(fn: () => void): void {
     this.onValidatorChange = fn;
+  }
+
+  override writeValue(value: string): void {
+    this.control.patchValue(value, { emitEvent: false });
   }
 }
