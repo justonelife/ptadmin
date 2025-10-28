@@ -18,7 +18,6 @@ export type BranchTrueFalseOnKey<K extends string, T, F = object> =
   | (Record<K, true> & T)
   | (Record<K, false> & F);
 
-type FieldKey = string;
 export type FieldData<ExtendedType extends string = DynamicType | string> = {
   label?: string;
   styleClass?: string;
@@ -35,9 +34,11 @@ export type FieldData<ExtendedType extends string = DynamicType | string> = {
           component?: Promise<Type<unknown>>;
           inputs: Record<string, LibSafeAny>;
         };
+        autoFocus?: boolean;
       })
   );
 
 export type RecordDynamicField<
   ExtendedType extends string = DynamicType | string,
-> = Record<FieldKey, FieldData<ExtendedType>>;
+  Obj extends object = Record<string, unknown>,
+> = Record<keyof Obj, FieldData<ExtendedType>>;

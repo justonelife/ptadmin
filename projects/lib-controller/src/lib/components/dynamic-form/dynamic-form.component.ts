@@ -35,7 +35,6 @@ import { LibErrorMessageComponent } from '../error-message/error-message.compone
   selector: 'lib-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LibComponentControlResolveService],
 })
 export class LibDynamicFormComponent extends LibBaseDynamic {
   service = inject(LibComponentControlResolveService);

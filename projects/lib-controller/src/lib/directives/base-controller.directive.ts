@@ -35,6 +35,7 @@ export abstract class LibBaseController<T>
 
   abstract placeholder: string | Signal<string>;
   abstract label: string | Signal<string>;
+  abstract autoFocus: boolean | Signal<boolean>;
 
   hasError = signal<boolean>(false);
 

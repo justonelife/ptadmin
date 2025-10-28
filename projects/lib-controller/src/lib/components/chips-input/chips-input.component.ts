@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  input,
+} from '@angular/core';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +37,7 @@ import { LibLabelComponent } from '../label/label.component';
 export class LibChipsInputComponent extends LibBaseController<string[]> {
   override placeholder = input<string>('');
   override label = input<string>('');
+  override autoFocus = input(false, { transform: booleanAttribute });
   override state: string[] = [];
 
   override writeValue(value: string[]): void {

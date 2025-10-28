@@ -76,6 +76,7 @@ export class LibPasswordInputComponent
 {
   override placeholder = input<string>('');
   override label = input<string>('');
+  override autoFocus = input(false, { transform: booleanAttribute });
 
   toggleMask = input(true, { transform: booleanAttribute });
 

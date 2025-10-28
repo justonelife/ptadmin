@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  input,
+} from '@angular/core';
 import { LibBaseController, LibSelectComponent } from '@libs/lib-controller';
 import { LibOption, provideControlValueAccessor } from '@libs/lib-core';
 
@@ -13,6 +18,7 @@ import { LibOption, provideControlValueAccessor } from '@libs/lib-core';
 export class GenderSelectComponent extends LibBaseController<number> {
   override placeholder = input<string>('');
   override label = input<string>('Gender');
+  override autoFocus = input(false, { transform: booleanAttribute });
 
   readonly OPTIONS: LibOption<number>[] = [
     {

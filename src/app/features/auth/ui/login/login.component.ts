@@ -10,6 +10,7 @@ import { LibButtonComponent } from '@libs/lib-button';
 import { LibCardComponent } from '@libs/lib-card';
 import {
   DYNAMIC_TYPE,
+  DynamicType,
   LibDynamicFormComponent,
   RecordDynamicField,
 } from '@libs/lib-controller';
@@ -32,8 +33,7 @@ import { LibTypedForm } from '@libs/lib-core';
 export class LoginComponent<T extends Login = Login> {
   login = output<T>();
 
-  //TODO: RecordDynamicField should accept Login interface and compute possible FieldKey
-  readonly FIELDS: RecordDynamicField = {
+  readonly FIELDS: RecordDynamicField<DynamicType, Login> = {
     email: {
       label: 'Email',
       type: DYNAMIC_TYPE.INPUT,
@@ -44,6 +44,7 @@ export class LoginComponent<T extends Login = Login> {
       inputs: {
         placeholder: 'Enter your email',
       },
+      autoFocus: true,
     },
     password: {
       label: 'Password',

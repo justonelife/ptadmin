@@ -40,7 +40,11 @@ export abstract class LibBaseDynamic<
             ...f,
             componentData: {
               component: resolve?.component,
-              inputs: { ...resolve?.inputs, label: f.label },
+              inputs: {
+                ...resolve?.inputs,
+                label: f.label,
+                autoFocus: f.autoFocus,
+              },
             },
             key,
           };

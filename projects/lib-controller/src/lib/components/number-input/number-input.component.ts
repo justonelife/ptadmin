@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  input,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { LibBaseController } from '../../directives/base-controller.directive';
@@ -24,6 +29,7 @@ import { provideControlValueAccessor } from '@libs/lib-core';
 export class LibNumberInputComponent extends LibBaseController<number> {
   override placeholder = input<string>('');
   override label = input<string>('');
+  override autoFocus = input(false, { transform: booleanAttribute });
 
   min = input<number | null>(null);
   max = input<number | null>(null);

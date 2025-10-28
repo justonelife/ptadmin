@@ -4,6 +4,7 @@
   @if (type() === "input") {
     <input
       matInput
+      [libAutoFocus]="autoFocus()"
       type="text"
       [(ngModel)]="state"
       class="w-full h-full focus:outline-none"

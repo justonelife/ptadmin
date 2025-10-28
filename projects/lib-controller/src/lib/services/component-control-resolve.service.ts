@@ -138,7 +138,9 @@ export class PasswordInputResolver implements ComponentResolver {
   }
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class LibComponentControlResolveService<
   ExtendedType extends string = DynamicType | string,
 > {

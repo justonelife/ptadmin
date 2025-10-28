@@ -1,13 +1,27 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  input,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
-import { LibBaseController } from '../../directives/base-controller.directive';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { provideControlValueAccessor } from '@libs/lib-core';
+import { MatInput } from '@angular/material/input';
+import {
+  LibAutoFocusDirective,
+  provideControlValueAccessor,
+} from '@libs/lib-core';
+import { LibBaseController } from '../../directives/base-controller.directive';
 import { LibLabelComponent } from '../label/label.component';
 
 @Component({
-  imports: [FormsModule, MatInput, MatFormFieldModule, LibLabelComponent],
+  imports: [
+    FormsModule,
+    MatInput,
+    MatFormFieldModule,
+    LibLabelComponent,
+    LibAutoFocusDirective,
+  ],
   selector: 'lib-text-input',
   templateUrl: './text-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +39,7 @@ import { LibLabelComponent } from '../label/label.component';
 export class LibTextInputComponent extends LibBaseController<string> {
   override placeholder = input<string>('');
   override label = input<string>('');
+  override autoFocus = input(false, { transform: booleanAttribute });
 
   type = input<'input' | 'textarea'>('input');
   rows = input<number>(5);

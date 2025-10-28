@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -31,6 +32,7 @@ export interface Option<T = LibSafeAny> {
 export class LibSelectComponent extends LibBaseController<unknown> {
   override placeholder = input<string>('');
   override label = input<string>('');
+  override autoFocus = input(false, { transform: booleanAttribute });
 
   rawOptions = input.required<Option<unknown>[] | unknown[]>({
     alias: 'options',
