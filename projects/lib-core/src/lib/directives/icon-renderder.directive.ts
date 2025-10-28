@@ -82,7 +82,13 @@ export class LibRendererService {
     renderer: Renderer2
   ) {
     const _icon = vcr.createComponent(MatIcon);
-    _icon.setInput('fontIcon', icon);
+    const CUSTOM_ICON = /custom:\w+/;
+    if (CUSTOM_ICON.test(icon)) {
+      _icon.setInput('svgIcon', icon);
+    } else {
+      _icon.setInput('fontIcon', icon);
+    }
+
     if (iconSet) {
       _icon.setInput('fontSet', iconSet);
     }
