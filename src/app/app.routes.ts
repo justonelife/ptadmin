@@ -13,6 +13,11 @@ export const routes: Routes = [
     canActivate: [],
     children: [
       {
+        path: 'users',
+        loadChildren: () =>
+          import('@features/users-management').then((r) => r.routes),
+      },
+      {
         path: 'system-settings',
         loadChildren: () =>
           import('@features/system-settings').then((r) => r.routes),

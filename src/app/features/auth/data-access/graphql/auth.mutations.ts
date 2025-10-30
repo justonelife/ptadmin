@@ -13,3 +13,12 @@ export const LOGIN = gql`
   ${AUTH_PAYLOAD}
   ${USER_ROLES}
 `;
+
+export const REFRESH_TOKEN = gql`
+  mutation RefreshToken($refreshToken: String!) {
+    refreshToken(refreshToken: $refreshToken) {
+      ...AuthPayload
+    }
+  }
+  ${AUTH_PAYLOAD}
+`;

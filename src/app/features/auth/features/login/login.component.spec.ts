@@ -86,4 +86,12 @@ describe('it should test LoginContainerComponent', () => {
       password: '123456',
     });
   });
+
+  it('it should have correct initial state', () => {
+    const formValue = component.form.getRawValue();
+    expect(formValue).toEqual({
+      email: '',
+      password: '',
+    });
+  });
 });
