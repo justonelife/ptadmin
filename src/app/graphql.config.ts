@@ -41,6 +41,10 @@ export const graphqlConfig: (Provider | EnvironmentProviders)[] = [
             // ignore 401 error for a refresh request
             if (operation.operationName === 'refreshToken') return;
 
+            // (async function () {
+            //   const accessToken = await refreshToken();
+            // })();
+
             const observable = new Observable<
               FetchResult<Record<string, LibSafeAny>>
             >((observer) => {
@@ -54,13 +58,13 @@ export const graphqlConfig: (Provider | EnvironmentProviders)[] = [
                   }
 
                   // Retry the failed request
-                  const subscriber = {
-                    next: observer.next.bind(observer),
-                    error: observer.error.bind(observer),
-                    complete: observer.complete.bind(observer),
-                  };
+                  // const subscriber = {
+                  //   next: observer.next.bind(observer),
+                  //   error: observer.error.bind(observer),
+                  //   complete: observer.complete.bind(observer),
+                  // };
 
-                  forward(operation).subscribe(subscriber);
+                  forward(operation).subscribe({});
                 } catch (err) {
                   observer.error(err);
                 }
@@ -71,7 +75,8 @@ export const graphqlConfig: (Provider | EnvironmentProviders)[] = [
           }
         }
       }
-      return forward(operation);
+      // return forward(operation);
+      return;
     });
 
     const options: ApolloClientOptions<LibSafeAny> = {
@@ -83,6 +88,8 @@ export const graphqlConfig: (Provider | EnvironmentProviders)[] = [
 
     const refreshToken = async () => {
       try {
+        if (!localStorage.getItem('refresh_token')) throw new Error('No Token');
+
         const refreshResolverResponse = await client.mutate<{
           refreshToken: {
             accessToken: string;
@@ -91,7 +98,7 @@ export const graphqlConfig: (Provider | EnvironmentProviders)[] = [
         }>({
           mutation: REFRESH_TOKEN,
           variables: {
-            refreshToken: localStorage.getItem('refresh_token') || '',
+            refreshToken: localStorage.getItem('refresh_token'),
           },
         });
 
@@ -105,7 +112,9 @@ export const graphqlConfig: (Provider | EnvironmentProviders)[] = [
         localStorage.setItem('refresh_token', refreshToken || '');
         return accessToken;
       } catch (err) {
+        // console.log(err);
         localStorage.clear();
+        // maybe log out
         throw err;
       }
     };

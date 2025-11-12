@@ -1,0 +1,25 @@
+@reference "tailwindcss";
+
+@mixin search-box-transition {
+  @apply transition-all duration-300;
+}
+
+:host ::ng-deep {
+  .search-box {
+    @include search-box-transition;
+    @apply w-[200px] flex items-center;
+
+    &--hide {
+      @apply w-0;
+    }
+
+    &--hide .mdc-text-field {
+      @include search-box-transition;
+      @apply p-0;
+    }
+
+    mat-form-field {
+      @apply border-0 bg-transparent;
+    }
+  }
+}

@@ -7,10 +7,17 @@ import {
 import { LOGIN } from '../graphql/auth.mutations';
 import { AuthPayload, Login } from '../types/auth';
 import { AuthService } from './auth.service';
+import { ME } from '../graphql/auth.queries';
 
 describe('it should test AuthService', () => {
   let service: AuthService;
   let controller: ApolloTestingController;
+  const localStorageMock = (function () {
+    return {
+      getItem: jasmine.createSpy('getItem'),
+      setItem: jasmine.createSpy('setItem'),
+    };
+  })();
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,6 +27,7 @@ describe('it should test AuthService', () => {
     service = TestBed.inject(AuthService);
 
     controller = TestBed.inject(ApolloTestingController);
+    Object.defineProperty(window, 'localStorage', { value: localStorageMock });
   });
 
   afterEach(() => {
@@ -54,6 +62,36 @@ describe('it should test AuthService', () => {
         login: {
           ...mockResponsePayload,
         },
+      },
+    });
+  });
+
+  it('it should save `access_token` into `localStorage`', () => {
+    service.saveAccessToken('value');
+    expect(localStorageMock.setItem).toHaveBeenCalledWith(
+      'access_token',
+      'value'
+    );
+  });
+
+  it('it should save `refresh_token` into `localStorage`', () => {
+    service.saveRefreshToken('value');
+    expect(localStorageMock.setItem).toHaveBeenCalledWith(
+      'refresh_token',
+      'value'
+    );
+  });
+
+  it('it should request and return if `isAuthenticated`', () => {
+    service.isAuthenticated().subscribe((response) => {
+      expect(response).toBe(true);
+    });
+
+    const op = controller.expectOne(ME);
+
+    op.flush({
+      data: {
+        me: { email: 'admin@example.com' },
       },
     });
   });

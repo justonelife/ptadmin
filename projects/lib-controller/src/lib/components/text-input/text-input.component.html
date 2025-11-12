@@ -14,6 +14,7 @@
   } @else {
     <textarea
       matInput
+      [libAutoFocus]="autoFocus()"
       [(ngModel)]="state"
       [placeholder]="placeholder()"
       (ngModelChange)="onChange(state)"

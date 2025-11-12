@@ -11,7 +11,7 @@ import { LibLabelComponent } from '../label/label.component';
       inline-flex
       items-center
       w-full
-      h-[40px]
+      h-full
       py-0
       px-2
       bg-white
@@ -27,7 +27,7 @@ import { LibLabelComponent } from '../label/label.component';
       "
       [libIconPosition]="iconPosition()"
       [icon]="icon() || ''"
-      [iconSet]="iconSet() || ''"
+      [iconSet]="iconSet() || 'outlined'"
     >
       <ng-content />
     </div>

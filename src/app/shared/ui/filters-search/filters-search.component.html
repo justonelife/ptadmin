@@ -1,0 +1,70 @@
+@let _isShowSearchBox = isShowSearchBox();
+@let _isShowFilters = isShowFilters();
+<pre>{{ form.value | json }}</pre>
+
+<form
+  #filtersSearch
+  [formGroup]="form"
+  class="focus-within:border-blue-500 border border-gray-300 dark:border-slate-700 h-[40px] w-fit px-2 rounded-4xl flex items-center"
+  [ngClass]="{ 'border-b-0 rounded-b-none border-blue-500!': _isShowFilters }"
+>
+  <button
+    type="button"
+    lib-button
+    icon="search"
+    severity="neutral"
+    appearance="ghost"
+    class="hover:text-blue-600 px-1"
+    (click)="showSearchBoxAndFocusInput()"
+  ></button>
+
+  <div
+    class="search-box"
+    [class.search-box--hide]="!_isShowSearchBox"
+    [class.duration-0!]="_isShowFilters"
+  >
+    <mat-form-field subscriptSizing="dynamic">
+      <input
+        matInput
+        formControlName="search"
+        type="text"
+        class="w-full h-full focus:outline-none"
+        placeholder="Search Item..."
+      />
+    </mat-form-field>
+
+    @if (form.controls.search.value?.length) {
+      <button
+        lib-button
+        icon="close"
+        iconSet="outlined-sm"
+        severity="neutral"
+        appearance="ghost"
+        (click)="clearSearchAndHideSearchBox()"
+      ></button>
+    }
+  </div>
+
+  <button
+    type="button"
+    lib-button
+    icon="filter_list"
+    severity="neutral"
+    appearance="ghost"
+    class="hover:text-blue-600 px-1"
+    (click)="isShowFilters.set(true); op.show($event, filtersSearch)"
+  ></button>
+
+  <lib-popover
+    #op
+    panelClass="w-[270px] border-blue-500 border border-t-0 p-4 rounded-t-none rounded-b-4xl"
+  >
+    <lib-controller-wrapper
+      icon="add"
+      iconSet="outlined-sm"
+      class="w-full h-6!"
+    >
+      <lib-select [options]="[]" placeholder="Add Filter"></lib-select>
+    </lib-controller-wrapper>
+  </lib-popover>
+</form>

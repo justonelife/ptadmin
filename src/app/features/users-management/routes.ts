@@ -19,7 +19,7 @@ export const routes: Routes = [
           ),
         title: 'Users Management',
         data: {
-          subTitle: 'Manage users',
+          subTitle: 'Manage and monitor all users',
         },
       },
     ],

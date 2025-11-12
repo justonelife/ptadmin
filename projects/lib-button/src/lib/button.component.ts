@@ -37,12 +37,12 @@ type ButtonSize = 'small' | 'medium' | 'large';
     LibClassMergerDirective,
   ],
   host: {
-    '[class]': 'styleClass()',
+    '[attr.button-class]': 'styleClass()',
   },
   providers: [
     {
       provide: LIB_CLASS_MERGER_SOURCES,
-      useValue: ['severity-class', 'appearance-class', 'class'],
+      useValue: ['severity-class', 'appearance-class', 'button-class', 'class'],
     },
   ],
 })

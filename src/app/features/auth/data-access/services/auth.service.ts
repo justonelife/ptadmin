@@ -1,12 +1,15 @@
 import { inject, Injectable } from '@angular/core';
+import { RedirectCommand, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { tap } from 'rxjs';
+import { catchError, map, of, tap } from 'rxjs';
 import { LOGIN } from '../graphql/auth.mutations';
+import { ME } from '../graphql/auth.queries';
 import { AuthPayload, Login } from '../types/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   apollo = inject(Apollo);
+  router = inject(Router);
   readonly ACCESS_TOKEN_KEY = 'access_token';
   readonly REFRESH_TOKEN_KEY = 'refresh_token';
 
@@ -26,6 +29,21 @@ export class AuthService {
           if (response.data) {
             this.saveTokens(response.data.login);
           }
+        })
+      );
+  }
+
+  isAuthenticated() {
+    return this.apollo
+      .query<{ me: { email: string } }>({
+        query: ME,
+      })
+      .pipe(
+        map(() => true),
+        catchError(() => {
+          return of(
+            new RedirectCommand(this.router.parseUrl('/auth/login'), {})
+          );
         })
       );
   }
