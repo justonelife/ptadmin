@@ -145,4 +145,25 @@ describe('it should test FiltersSearchComponent', () => {
     const searchBoxDiv = fixture.debugElement.query(By.css('.search-box'));
     expect(searchBoxDiv.classes['search-box--hide']).toBeFalsy();
   });
+
+  it('it should keep the search box visible when there is a search value and the filters panel is open, after clicking outside', () => {
+    // Setup
+    component.isShowSearchBox.set(true);
+    component.form.controls.search.setValue('foo');
+    const filterButton = fixture.debugElement.query(
+      By.css('button[icon="filter_list"]')
+    );
+    filterButton.nativeElement.click();
+    fixture.detectChanges();
+
+    // Assert Search Box Is Open
+    const searchBoxDiv = fixture.debugElement.query(By.css('.search-box'));
+    expect(searchBoxDiv.classes['search-box--hide']).toBeFalsy();
+
+    document.body.click();
+    fixture.detectChanges();
+
+    // Assert Search Box Remain Open
+    expect(searchBoxDiv.classes['search-box--hide']).toBeFalsy();
+  });
 });

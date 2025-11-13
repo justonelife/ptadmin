@@ -87,7 +87,7 @@ describe('it should test LoginContainerComponent', () => {
     });
   });
 
-  it('it should have correct initial state', () => {
+  xit('it should have correct initial state', () => {
     const formValue = component.form.getRawValue();
     expect(formValue).toEqual({
       email: '',

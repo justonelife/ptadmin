@@ -13,6 +13,7 @@ import {
   ElementRef,
   inject,
   input,
+  output,
   signal,
   TemplateRef,
   viewChild,
@@ -43,6 +44,8 @@ export class LibPopoverComponent {
   popoverTemplate = viewChild.required<TemplateRef<unknown>>('popover');
   appendTo = input<'body' | null>(null);
   panelClass = input<string>('');
+
+  outsideClick = output();
 
   target: HTMLElement | null = null;
 
@@ -93,6 +96,7 @@ export class LibPopoverComponent {
             this.overlayRef.dispose();
             this.overlayRef = null;
             this.target = null;
+            this.outsideClick.emit();
             outsidePointerEventsSubscription.unsubscribe();
           }
         }),

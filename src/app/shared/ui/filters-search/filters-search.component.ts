@@ -17,6 +17,7 @@ import {
   LibSelectComponent,
 } from '@libs/lib-controller';
 import { LibPopoverComponent } from '@libs/lib-overlay';
+import { OutsideClickDirective } from '@shared/data-access';
 
 @Component({
   selector: 'app-filters-search',
@@ -33,26 +34,19 @@ import { LibPopoverComponent } from '@libs/lib-overlay';
     NgClass,
     LibSelectComponent,
     LibControllerWrapperComponent,
+    OutsideClickDirective,
   ],
 })
 export class FiltersSearchComponent {
   elementRef = inject(ElementRef);
 
-  // @HostListener('document:click', ['$event'])
-  // onClick(event: Event) {
-  //   if (
-  //     this.isShowSearchBox() &&
-  //     !this.form.controls.search.value &&
-  //     !this.elementRef.nativeElement.contains(event.target)
-  //   ) {
-  //     this.isShowFilters.set(false);
-  //     this.isShowSearchBox.set(false);
-  //   }
-  // }
-
   isShowFilters = signal(false);
-  isShowSearchBox = linkedSignal(() => {
-    return this.isShowFilters();
+  isShowSearchBox = linkedSignal<boolean, boolean>({
+    source: this.isShowFilters,
+    computation: (source, previous) => {
+      if (this.form.controls.search.value) return !!previous?.value;
+      return source;
+    },
   });
 
   form = new FormGroup({
